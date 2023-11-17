@@ -29,7 +29,7 @@
 
 - Image captioning with the flavours of NYT headlines.
 
-[GitHub Repo](https://github.com/AIWithShrey/BLIP2-NYT)
+- [GitHub Repo](https://github.com/AIWithShrey/BLIP2-NYT)
 
 ### Celebrity Song Player
 - Building an application using TensorFlow for image recognition and Spotify API to identify Bollywood actors/actresses and play a random song from one of their movies.
