@@ -1,8 +1,9 @@
 # TensorFlow Certified Developer
 
 ## Education
-- Diploma, International Baccalaureate | Indus International School, Hyderabad (_May 2021_)
 - B.S, Computer Science | Missouri University of Science and Technology (_Fall 21' - Fall 25'_)
+
+- Diploma, International Baccalaureate | Indus International School, Hyderabad (_May 2021_)
 
 ## Work Experience
 **NVIDIA University Ambassador (_Dec 2022 - Present_)**
