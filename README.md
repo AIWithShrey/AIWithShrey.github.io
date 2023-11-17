@@ -1,4 +1,4 @@
-# Hi! This is Shreyas Mocherla
+# Shreyas Mocherla
 
 ### Education
 - High School: Indus International School, Hyderabad
