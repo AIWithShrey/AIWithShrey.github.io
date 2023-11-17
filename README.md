@@ -21,11 +21,13 @@
 - Utilized Microsoft Azure (Azure OpenAI and Azure Cognitive Search Services) to cut operational costs and increase the overall security concerning the customers and their data.
 
 ## Projects
-### BLIP2 Fine-Tuning on NYT
+### BLIP2 Fine-Tuning on NYT unmasked dataset
 
 - Used Bootstrapping Language-Image Pre-training Version 2 (BLIP2) model to predict the news category on a given NYT image.
   
-- Currently fine-tuning the model to provide an NYT-style headline to a given image, making it a "headline generator".
+- Fine-Tuned the model to generate an NYT-style headline for a given image, making it a "headline generator".
+
+- Image captioning with the flavours of NYT headlines.
 
 [GitHub Repo](https://github.com/AIWithShrey/BLIP2-NYT)
 
