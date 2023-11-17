@@ -1,5 +1,7 @@
+---
 title: Shreyas Mocherla
 #show_downloads: true
 logo: /assets/Circle_cropped.png
-background-color: lightcoral
+layout: post
+---
 theme: jekyll-theme-minimal
