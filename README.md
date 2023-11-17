@@ -39,6 +39,6 @@
 - Currently in-progress, curating the dataset is the biggest challenge to this project.
 
 ### Pneumonia detector
-- Used a pre-trained image recognition model (VGG16) on TensorFlow Hub and fine-tuned it to find traces and the presence of Pneumonia in a given x-ray scan.
+- Used a pre-trained image recognition model (VGG16) on TensorFlow Hub and fine-tuned it to find traces and the presence of Pneumonia in a given x-ray scan of the lungs.
   
 - The model returns a boolean (True or False) value to show the presence of Pneumonia, making this a binary classification project.
