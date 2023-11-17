@@ -2,7 +2,6 @@
 
 ## Education
 - B.S, Computer Science | Missouri University of Science and Technology (_Fall 21' - Fall 25'_)
-
 - Diploma, International Baccalaureate | Indus International School, Hyderabad (_May 2021_)
 
 ## Work Experience
