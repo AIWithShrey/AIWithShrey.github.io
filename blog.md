@@ -5,6 +5,6 @@ permalink: /blog/
 ---
 
 Recent blogposts:
-[jekyll][jekyll-organization]
+[Test blogpost][test]
 
-[jekyll-organization]: _posts/2024-04-18-welcome-to-jekyll.markdown
+[test]: _posts/2024-04-18-test.markdown
