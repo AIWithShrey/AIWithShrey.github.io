@@ -5,7 +5,7 @@ navbar_entries:
   - title: blog
     url: blog
   
-  - image: assets/images/Circle_cropped.png
+  - logo: assets/images/Circle_cropped.png
 
 project_entries:
   - title: Project 1
