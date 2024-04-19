@@ -31,7 +31,7 @@ url: "https://AIWithShrey.github.io" # the base hostname & protocol for your sit
 github_username:  AIWithShrey
 
 # Build settings
-theme: minima
+theme: jekyll-theme-minimal
 plugins:
   - jekyll-feed
 
