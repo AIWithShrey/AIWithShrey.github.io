@@ -3,6 +3,6 @@ layout: post
 title:  "Test Blog!"
 date:   2024-04-18 22:32:05 -0500
 categories: test
-by: Shreyas Mocherla
+author: Shreyas Mocherla
 ---
 This is a test blog post. Welcome to my blog.
