@@ -19,4 +19,4 @@ In 2024, I aim to bring my skills in AI with Cloud Native technologies such as C
 
 With that said, I am also a Linux Foundation Certified System Administrator (LFCS) and plan to become a Certified Kubernetes Application Developer (CKAD) by the end of 2024.
 
-I am currently looking for internships in the field of AI/ML and Cloud Native technologies. If you have any opportunities, feel free to reach out to me at shreyas@shreyasm.com
+I am currently looking for internships in the field of AI/ML and Cloud Native technologies. If you have any opportunities, feel free to reach out to me at <shreyas@shreyasm.com>
