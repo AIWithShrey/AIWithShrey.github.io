@@ -7,4 +7,6 @@ layout: home
 
 Welcome to Shreyas's home. 
 
-Find my portfolio here: [portfolio][_pages/portfolio.md]
+Find my portfolio here: [portfolio][portfolio_link]
+
+[portfolio_link]: _pages/portfolio.md
