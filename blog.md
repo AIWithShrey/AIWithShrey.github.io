@@ -1,5 +1,8 @@
 ---
 layout: page
-title: "Shreyas Mocherla's Blog"
-permalink: /blog
+title: Blog
+permalink: /blog/
 ---
+
+Recent blogposts:
+[test post] : /Users/shreyas/Documents/AIWithShrey.github.io/_posts/2024-04-18-welcome-to-jekyll.markdown
