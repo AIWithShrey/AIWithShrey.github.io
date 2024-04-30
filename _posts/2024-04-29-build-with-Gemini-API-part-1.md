@@ -29,9 +29,7 @@ After running these commands, we want to create a new Google Cloud project and e
 Apart from the above steps, you will also need a library that you can build an application with. For this tutorial, we'll be using "streamlit" which is a Python library that allows you to create interactive web applications with just a few lines of code. You can install streamlit by running the following command:
 
 ```bash
-
-pip install streamlit
-    
+pip install streamlit    
 ```
 
 ## Writing the code
@@ -39,7 +37,6 @@ pip install streamlit
 Now let's write the code for our chatbot. Here's a simple chatbot that uses the Gemini API to generate responses to user input:
 
 ```python
-
 import vertexai
 import time
 import streamlit as st
@@ -74,9 +71,7 @@ if prompt := st.chat_input("Enter your code here"):
 That's it! You've just built a simple chatbot that uses the Gemini API to generate responses to user input. You can now run the chatbot by running the following command:
 
 ```bash
-
 streamlit run chatbot.py
-    
 ```
 
 This will start a local web server that you can access in your browser. You can now interact with the chatbot by entering text in the chat input box. The chatbot will use the Gemini API to generate responses to your input.
