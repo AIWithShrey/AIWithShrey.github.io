@@ -8,32 +8,20 @@ navbar_entries:
 project_entries:
   - title: BLIP2 Fine-Tuning on NYT unmasked dataset
     url: https://github.com/AIWithShrey/BLIP2-NYT
-    desc: 
-      - Used Bootstrapping Language-Image Pre-training Version 2 (BLIP2) model to predict the news category on a given NYT image.
-      - Fine-Tuned the model to generate an NYT-style headline for a given image, making it a "headline generator".
-      - Image captioning with the flavours of NYT headlines.
+    desc: Fine-Tuned the model to generate an NYT-style headline for a given image, making it a "headline generator".
 
-  - title: Project 2
-    url: overview-post
-    desc: Projects are shown in card layout
+  - title: KerasOpenCL
+    url: https://github.com/AIWithShrey/KerasOpenCL
+    desc: Training a CNN on the MNIST dataset using my MacBook's AMD GPU. Check out https://github.com/plaidml/plaidml.
 
-  - title: Project 3
-    url: overview-post
-    desc: You can control visibility from _config.yml file
+  - title: LLM-based chat app
+    url: https://github.com/AIWithShrey/llm-app
+    desc: A chatbot app built with Streamlit, LangChain and LlamaCpp.
 
-  - title: Project 4
-    url: overview-post
-    desc: This project uses highlight markup, configured in _data/home.yml
-    highlight: WIP
-
-  - title: Project 5
-    url: overview-post
-    desc: Moonwalk also has horizontal list (used in header and footer)
-    highlight: WIP
-
-  - title: Project 6
-    url: overview-post
-    desc: It also has a scalable vertical list (in case you need it)
+  - title: Missouri S&T Chatbot
+    url: https://github.com/AIWithShrey/MST-Chatbot
+    desc: Based on the LLM-based chatbot but specific to MS&T, making it a student-centric application.
+    highlight: NEW
 
 #old_project_entries:
 #  - title: Soopr
@@ -57,13 +45,13 @@ footer_entries:
   - title: LinkedIn
     url: https://linkedin.com/in/aiwithshrey
 
-  - title: X
+  - title: X (Formerly Twitter)
     url: https://twitter.com/ShreyasMocherla
 
-  - title: github
+  - title: Github
     url: https://github.com/aiwithshrey
 
-  - title: feed
+  - title: Feed
     url: feed.xml
 
 misc_entries:
