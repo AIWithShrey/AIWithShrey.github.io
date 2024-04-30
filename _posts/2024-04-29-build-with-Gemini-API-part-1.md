@@ -1,36 +1,32 @@
 ---
 layout: post
 author: Shreyas Mocherla
-tags: [overview, GenAI]
+title: Build an LLM-powered application with Gemini API Part 1
+tags: [Chatbot, GenAI]
 ---
-# Build an LLM-powered application with the Gemini API
 
-First things first, what is Gemini? Gemini is an LLM that is a response to OpenAI's GPT model. It is a large language model that is trained on a diverse range of text data and is capable of generating human-like text. Gemini is a powerful tool that can be used for a variety of applications, such as chatbots, content generation, and more.
+## Introduction to Gemini API
 
-Today we'll explore a fraction of what Gemini can do by building a simple application that uses the Gemini API. The Gemini API allows you to interact with the Gemini model and generate text using the model. In this tutorial, we'll build a simple chatbot that uses the Gemini API to generate responses to user input. **Best of all, the Gemini API is currently free to use, so you can start building with it right away!**
+Gemini is a state-of-the-art LLM created by Google DeepMind, designed for multimodal applications enabling seamless integration across text, images, code, and audio. This large language model stands out due to its performance benchmarks, showing impressive capabilities over GPT models in various standard tests like MMLU, DROP, and HellaSwag​.
+
+## Getting Started with the Gemini API
+
+Today, we'll embark on creating a simple yet powerful application using the Gemini API. The API is freely available, making it an accessible choice for developers keen to explore AI-powered applications without initial investment​.
 
 ## Prerequisites
 
-There is a lot of documentation on Gemini where you can get lost in the details. But don't worry, I'll guide you through the process of building a simple chatbot using the Gemini API. Here are the prerequisites for this tutorial:
+To follow this tutorial, you should have:
 
-- Basic knowledge of Python
-- A Google Cloud project set up and Vertex AI API enabled
-- Code IDE (I'll be using VS Code)
-- Vertext AI Python SDK installed
+- Basic knowledge of Python.
+- A Google Cloud project with Vertex AI API enabled.
+- Visual Studio Code or another code IDE.
+- The Vertex AI Python SDK installed.
 
 ## Setting up the project
 
-First, let's set up the project structure. Create a new directory for your project and create a new Python file called `chatbot.py`. In this file, we'll write the code for our chatbot.
-
-Next, let's install the Google Cloud CLI and the Vertex AI Python SDK. You can do this by going to [Install Google Cloud CLI page](https://cloud.google.com/sdk/docs/install).
-
-After running these commands, we want to create a new Google Cloud project and enable the Vertex AI API. You can do this by following the instructions in the [Google Cloud documentation](https://cloud.google.com/vertex-ai/docs/start/cloud-environment).
-
-Apart from the above steps, you will also need a library that you can build an application with. For this tutorial, we'll be using "streamlit" which is a Python library that allows you to create interactive web applications with just a few lines of code. You can install streamlit by running the following command:
-
-```bash
-pip install streamlit    
-```
+1. **Initialize your project**: Start by setting up your project directory and creating a Python file named `chatbot.py`.
+2. **Install necessary tools**: Ensure the Google Cloud CLI and Vertex AI Python SDK are installed. Detailed instructions are available on the Google Cloud documentation page.
+3. **Streamlit installation**: Install Streamlit using `pip install streamlit`, which will help in creating an interactive web app for the chatbot.
 
 ## Writing the code
 
@@ -68,18 +64,12 @@ if prompt := st.chat_input("Enter your code here"):
         st.write_stream(response)
 ```
 
-That's it! You've just built a simple chatbot that uses the Gemini API to generate responses to user input. You can now run the chatbot by running the following command:
+Run your chatbot with streamlit run chatbot.py. This command starts a local server where you can interact with your Gemini-powered chatbot.
 
-```bash
-streamlit run chatbot.py
-```
+## Exploring Advanced Features
 
-This will start a local web server that you can access in your browser. You can now interact with the chatbot by entering text in the chat input box. The chatbot will use the Gemini API to generate responses to your input.
+As you get comfortable with the basics, consider delving into the multimodal capabilities of Gemini, which allow it to handle not just text but also images, audio, and code seamlessly. This makes Gemini particularly powerful for applications requiring cross-modal data handling​.
 
 ## Conclusion
 
-In this tutorial, we explored how to build a simple chatbot using the Gemini API. The Gemini API is a powerful tool that can be used for a variety of applications, and I encourage you to explore its capabilities further. I hope you found this tutorial helpful, and I look forward to seeing what you build with the Gemini API!
-
-This was part one of a series of tutorials on building applications with the Gemini API.
-
-In the upcoming tutorials, we'll expand on this chatbot and explore more advanced features of the Gemini API. Stay tuned!
+This tutorial provides a foundation for building applications using the Gemini API. As Gemini offers extensive documentation and community support, it’s an excellent opportunity to expand your skills in AI application development. Stay tuned for more advanced tutorials in this series!
