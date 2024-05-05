@@ -12,7 +12,7 @@ project_entries:
 
   - title: KerasOpenCL
     url: https://github.com/AIWithShrey/KerasOpenCL
-    desc: Training a CNN on the MNIST dataset using my MacBook's AMD GPU. Check out https://github.com/plaidml/plaidml.
+    desc: Training a CNN on the MNIST dataset using my MacBook's AMD GPU.
 
   - title: LLM-based chat app
     url: https://github.com/AIWithShrey/llm-app
