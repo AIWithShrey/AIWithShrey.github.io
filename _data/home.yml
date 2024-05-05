@@ -24,7 +24,12 @@ project_entries:
     highlight: NEW
 
   - title: Codora - Your personal coding mentor
-    url: https://codora.streamlit.app
+    entries:
+      - title: GitHub Repo
+        url: https://github.com/AIWithShrey/Codora
+      
+      - title: Website app
+        url: https://codora.streamlit.app
     desc: Codora is a chatbot that can answer your questions on your code and help you debug your program.
     highlight: NEW
 
