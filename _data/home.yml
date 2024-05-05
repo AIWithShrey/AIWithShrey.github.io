@@ -23,6 +23,11 @@ project_entries:
     desc: Based on the LLM-based chatbot but specific to MS&T, making it a student-centric application.
     highlight: NEW
 
+  - title: Codora - Your personal coding mentor
+    url: https://codora.streamlit.app
+    desc: Codora is a chatbot that can answer your questions on your code and help you debug your program.
+    highlight: NEW
+
 #old_project_entries:
 #  - title: Soopr
 #    url: https://www.soopr.co
