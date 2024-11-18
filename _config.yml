@@ -2,9 +2,9 @@ title: Shreyas's Home
 author: Shreyas Mocherla
 url: https://www.aiwithshrey.github.io # root address of the site
 description: > # description of the site (multiple lines allowed)
-  Shreyas Mocherla's personal blog. I write about AI, ML, and other tech stuff.
+  Shreyas Mocherla's personal blog. I write about Generative AI, Deep Learning and Kubernetes.
   You can find my projects, blog posts, and my personal information here.
-  I'm passionate about Deep Learning and serving AI applications.
+  I'm passionate about AI and scaling AI-driven solutions.
 
 permalink: /:slug
 

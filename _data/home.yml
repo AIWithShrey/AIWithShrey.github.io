@@ -21,12 +21,18 @@ project_entries:
   - title: Missouri S&T Chatbot
     url: https://github.com/AIWithShrey/MST-Chatbot
     desc: Based on the LLM-based chatbot but specific to MS&T, making it a student-centric application.
-    highlight: NEW
 
   - title: Codora - Your personal coding mentor
     url: https://codora.streamlit.app
     desc: Codora is a chatbot that can answer your questions on your code and help you debug your program.
     highlight: NEW
+
+  - title: InSightful - The AI assistant for tech communities.
+    url: https://github.com/infracloudio/insightful
+    desc: InSightful is a tool that analyzes tech community discussions, community health, engagement, sentiment, 
+    search Stack Overflow, and browses the web for relevant information on community topics.
+    highlight: NEW
+
 
 #old_project_entries:
 #  - title: Soopr
