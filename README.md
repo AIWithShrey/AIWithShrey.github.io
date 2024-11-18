@@ -1,6 +1,4 @@
-# TensorFlow Certified Developer
-# Linux Foundation Certified Systems Administrator
-# Certified Kubernetes Application Developer
+# All about me
 
 ## Education
 - B.S, Computer Science | Missouri University of Science and Technology (_Fall 21' - Fall 25'_)
@@ -10,8 +8,8 @@
 **NVIDIA University Ambassador (_Dec 2022 - Present_)**
 - Missouri University of Science and Technology's youngest NVIDIA University Ambassador (Usually given to professors)
 
-**NVIDIA Deep Learning Institute (DLI) Certified Instructor. (_Dec 2022 - Present_)**
-- Missouri University of Science and Technology's youngest DLI Certified Instructor.
+**NVIDIA University Ambassador. (_Dec 2022 - Present_)**
+- Missouri University of Science and Technology's youngest Deep Learning Institute Certified Instructor and Univesity Ambassador.
   
 - Delivers a semesterly workshop on Fundamentals of Deep Learning. Free for students and certification upon passing the assessment.
 
@@ -34,6 +32,12 @@
 - The chatbot helps in acquiring important details regarding the case with a query in the simple natural language form. The chatbot excels in summarising, producing a timeline of events, extracting important entities and their corresponding details as well.
 
 - Utilized Microsoft Azure (Azure OpenAI and Azure Cognitive Search Services) to cut operational costs and increase the overall security concerning the customers and their data.
+
+## Certifications
+- TensorFlow Certified Developer
+- Linux Foundation Certified Systems Administrator
+- Certified Kubernetes Application Developer
+- NVIDIA DLI Certified Instructor
 
 ## Projects
 ### BLIP2 Fine-Tuning on NYT unmasked dataset
