@@ -1,6 +1,16 @@
 ---
 ---
 
+// Design System Foundation
+@import "design-system";
+
+// Base Theme
 @import "moonwalk";
+
+// Custom Components & Layouts
+@import "components";
+@import "layouts";
+
+// Existing
 @import "list";
 @import "syntax";

@@ -1,0 +1,72 @@
+# Featured and All Projects
+
+featured:
+  - title: Kyverno MCP Server
+    description: A Model Context Protocol server that enables LLMs to generate, validate, and manage Kubernetes policies using Kyverno. Empowers AI assistants like Claude and Cursor to interact with Kubernetes clusters.
+    url: https://github.com/nirmata/kyverno-mcp
+    tags: [Kubernetes, MCP, Go, Kyverno]
+    icon: "\U0001F50C"
+    highlight: FEATURED
+
+  - title: NCTL AI Agent
+    description: A conversational CLI tool that transforms natural language into Kubernetes policies. Core component of Nirmata's AI Platform Engineering Assistant launched at KubeCon NA 2025.
+    url: https://nirmata.com/nctl-ai/
+    tags: [AI, Kubernetes, Policy-as-Code, Go]
+    icon: "\U0001F916"
+    highlight: NIRMATA
+
+  - title: InSightful
+    description: An intelligent ReAct AI agent for tech communities that analyzes discussions, tracks sentiment, searches Stack Overflow, and browses the web for relevant technical information.
+    url: https://github.com/infracloudio/insightful
+    tags: [LangChain, RAG, Python, AI Agent]
+    icon: "\U0001F4AC"
+    highlight: CNCF
+
+all:
+  - title: Kyverno MCP Server
+    description: MCP server enabling LLMs to generate and validate Kubernetes policies using Kyverno.
+    url: https://github.com/nirmata/kyverno-mcp
+    tags: [Kubernetes, MCP, Go, Kyverno]
+    category: Cloud Native
+
+  - title: NCTL AI Agent
+    description: CLI agent transforming natural language into Kubernetes policies.
+    url: https://nirmata.com/nctl-ai/
+    tags: [AI, Kubernetes, Policy-as-Code]
+    category: Cloud Native
+
+  - title: InSightful
+    description: AI assistant for tech communities - analyzing discussions, sentiment, and providing contextual Q&A.
+    url: https://github.com/infracloudio/insightful
+    tags: [LangChain, RAG, Python]
+    category: AI/ML
+
+  - title: BLIP2 NYT Headline Generator
+    description: Fine-tuned BLIP2 model to generate New York Times-style headlines for images. Combines vision and language understanding.
+    url: https://github.com/AIWithShrey/BLIP2-NYT
+    tags: [PyTorch, Computer Vision, NLP]
+    category: AI/ML
+
+  - title: Codora
+    description: Personal coding mentor chatbot that answers questions about your code and helps debug programs using LLM-powered analysis.
+    url: https://codora.streamlit.app
+    tags: [Streamlit, LangChain, Python]
+    category: AI/ML
+
+  - title: MST Chatbot
+    description: LLM-powered chatbot built specifically for Missouri S&T students, providing campus-specific information and assistance.
+    url: https://github.com/AIWithShrey/MST-Chatbot
+    tags: [LangChain, Streamlit, RAG]
+    category: AI/ML
+
+  - title: LLM Chat App
+    description: A chatbot application built with Streamlit, LangChain, and LlamaCpp for local LLM inference.
+    url: https://github.com/AIWithShrey/llm-app
+    tags: [Streamlit, LangChain, LlamaCpp]
+    category: AI/ML
+
+  - title: KerasOpenCL
+    description: Training convolutional neural networks on the MNIST dataset using AMD GPU acceleration through OpenCL.
+    url: https://github.com/AIWithShrey/KerasOpenCL
+    tags: [Keras, OpenCL, Deep Learning]
+    category: AI/ML

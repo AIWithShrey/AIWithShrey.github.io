@@ -1,0 +1,62 @@
+<form class="contact-form" action="https://formspree.io/f/mwpkqpzq" method="POST" aria-label="Contact form">
+  <div class="contact-form__group">
+    <label class="contact-form__label" for="name">Name <span aria-hidden="true">*</span></label>
+    <input
+      class="contact-form__input"
+      type="text"
+      id="name"
+      name="name"
+      placeholder="Your name"
+      required
+    >
+  </div>
+
+  <div class="contact-form__group">
+    <label class="contact-form__label" for="email">Email <span aria-hidden="true">*</span></label>
+    <input
+      class="contact-form__input"
+      type="email"
+      id="email"
+      name="_replyto"
+      placeholder="your.email@example.com"
+      required
+    >
+  </div>
+
+  <div class="contact-form__group">
+    <label class="contact-form__label" for="subject">Subject <span aria-hidden="true">*</span></label>
+    <input
+      class="contact-form__input"
+      type="text"
+      id="subject"
+      name="subject"
+      placeholder="What is this about?"
+      required
+    >
+  </div>
+
+  <div class="contact-form__group">
+    <label class="contact-form__label" for="message">Message <span aria-hidden="true">*</span></label>
+    <textarea
+      class="contact-form__textarea"
+      id="message"
+      name="message"
+      placeholder="Your message..."
+      required
+    ></textarea>
+  </div>
+
+  <!-- Honeypot for spam protection -->
+  <input type="text" name="_gotcha" style="display:none">
+
+  <button type="submit" class="contact-form__submit">
+    Send Message
+  </button>
+</form>
+
+<div class="mt-8 text-center">
+  <p class="text-muted text-sm">Or reach out directly at</p>
+  <a href="mailto:shreyas@shreyasm.com" class="btn btn--outline mt-4">
+    shreyas@shreyasm.com
+  </a>
+</div>

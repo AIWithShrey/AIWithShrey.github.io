@@ -1,0 +1,35 @@
+<div class="hud-overlay" aria-hidden="true">
+  <div class="hud-corner hud-corner--tl">
+    <span class="hud-bracket">[</span>
+    <span class="hud-text">SYS.ONLINE</span>
+  </div>
+  <div class="hud-corner hud-corner--tr">
+    <span class="hud-text" id="hud-time">00:00:00</span>
+    <span class="hud-bracket">]</span>
+  </div>
+  <div class="hud-corner hud-corner--bl">
+    <span class="hud-bracket">[</span>
+    <span class="hud-text">SECTOR.07</span>
+  </div>
+  <div class="hud-corner hud-corner--br">
+    <span class="hud-text">v2.0.77</span>
+    <span class="hud-bracket">]</span>
+  </div>
+  <div class="hud-scanline"></div>
+</div>
+
+<script>
+// Update HUD time display
+(function() {
+  const timeEl = document.getElementById('hud-time');
+  if (!timeEl) return;
+
+  function updateTime() {
+    const now = new Date();
+    timeEl.textContent = now.toTimeString().split(' ')[0];
+  }
+
+  updateTime();
+  setInterval(updateTime, 1000);
+})();
+</script>

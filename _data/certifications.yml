@@ -1,0 +1,68 @@
+# Professional Certifications
+
+certifications:
+  # Kubernetes Certifications
+  - title: CNCF Kubestronaut
+    issuer: Cloud Native Computing Foundation
+    date: "January 2025"
+    icon: "\U0001F680"
+    description: Achieved all five CNCF Kubernetes certifications, becoming one of the youngest Kubestronauts globally. Demonstrates comprehensive expertise across Kubernetes administration, application development, and security.
+    credential_url: https://www.credly.com/users/shreyas-mocherla
+
+  - title: Certified Kubernetes Administrator (CKA)
+    issuer: Cloud Native Computing Foundation
+    date: "2024"
+    icon: "\u2699\uFE0F"
+    description: Validates skills in Kubernetes cluster administration including installation, configuration, networking, storage, and troubleshooting production environments.
+    credential_url: https://www.credly.com/users/shreyas-mocherla
+
+  - title: Certified Kubernetes Application Developer (CKAD)
+    issuer: Cloud Native Computing Foundation
+    date: "2024"
+    icon: "\U0001F4E6"
+    description: Demonstrates proficiency in designing, building, and deploying cloud-native applications on Kubernetes, including multi-container pods, services, and configurations.
+    credential_url: https://www.credly.com/users/shreyas-mocherla
+
+  - title: Certified Kubernetes Security Specialist (CKS)
+    issuer: Cloud Native Computing Foundation
+    date: "2024"
+    icon: "\U0001F512"
+    description: Advanced certification covering Kubernetes security best practices including cluster hardening, system hardening, supply chain security, and runtime security.
+    credential_url: https://www.credly.com/users/shreyas-mocherla
+
+  - title: Kubernetes and Cloud Native Associate (KCNA)
+    issuer: Cloud Native Computing Foundation
+    date: "2024"
+    icon: "\u2601\uFE0F"
+    description: Entry-level certification demonstrating foundational knowledge of Kubernetes and the cloud native ecosystem including container orchestration concepts.
+    credential_url: https://www.credly.com/users/shreyas-mocherla
+
+  - title: Kubernetes and Cloud Native Security Associate (KCSA)
+    issuer: Cloud Native Computing Foundation
+    date: "2024"
+    icon: "\U0001F6E1\uFE0F"
+    description: Validates understanding of security fundamentals in cloud native environments, covering 4Cs of cloud native security and Kubernetes security primitives.
+    credential_url: https://www.credly.com/users/shreyas-mocherla
+
+  # AI/ML Certifications
+  - title: TensorFlow Developer Certificate
+    issuer: Google
+    date: "2023"
+    icon: "\U0001F9E0"
+    description: Demonstrates proficiency in building and training neural networks using TensorFlow, including CNNs for computer vision, RNNs for NLP, and time series forecasting models.
+    credential_url: https://www.credential.net/
+
+  - title: NVIDIA Deep Learning Institute Certified Instructor
+    issuer: NVIDIA
+    date: "2024"
+    icon: "\U0001F4DA"
+    description: Certified to deliver NVIDIA's Deep Learning Institute courses, enabling teaching of GPU-accelerated deep learning and AI applications to others.
+    credential_url: https://www.nvidia.com/dli
+
+  # Linux/System Administration
+  - title: Linux Foundation Certified System Administrator (LFCS)
+    issuer: Linux Foundation
+    date: "2024"
+    icon: "\U0001F427"
+    description: Validates essential Linux system administration skills including user management, networking, storage management, and system operations across enterprise environments.
+    credential_url: https://www.credly.com/users/shreyas-mocherla

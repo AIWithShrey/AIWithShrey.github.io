@@ -1,0 +1,29 @@
+<div class="cert-grid">
+  {% for cert in site.data.certifications.certifications %}
+  {% if cert.credential_url %}
+  <a href="{{ cert.credential_url }}" target="_blank" rel="noopener noreferrer" class="modern-card-link">
+  {% endif %}
+    <article class="cert-card">
+      <div class="cert-card__icon">
+        {{ cert.icon }}
+      </div>
+
+      <div class="cert-card__content">
+        <h3 class="cert-card__title">
+          {{ cert.title }}
+        </h3>
+
+        <p class="cert-card__issuer">{{ cert.issuer }}</p>
+
+        <p class="cert-card__description">
+          {{ cert.description }}
+        </p>
+
+        <p class="cert-card__date">Earned: {{ cert.date }}</p>
+      </div>
+    </article>
+  {% if cert.credential_url %}
+  </a>
+  {% endif %}
+  {% endfor %}
+</div>

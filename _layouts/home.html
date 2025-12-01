@@ -3,43 +3,38 @@ layout: default
 ---
 
 <header>
-{% if site.theme_config.show_navbar == true %}
-  {% include horizontal_list.html collection=site.data.home.navbar_entries %}
-  <div class="dashed"></div>
-{% endif %}
-
-  <h1>{{ site.title }}</h1>
-  {% if site.theme_config.show_description == true %}
-    <p>{{ site.description }}</p>
-  {% endif %}
+  <div class="site-header-content">
+    <a href="https://github.com/AIWithShrey" class="site-logo">
+      <img src="{{ '/assets/images/Circle_cropped.png' | relative_url }}" alt="Logo">
+    </a>
+    {% if site.theme_config.show_navbar == true %}
+      {% include horizontal_list.html collection=site.data.home.navbar_entries %}
+    {% endif %}
+  </div>
 </header>
+
+<!-- Hero Section -->
+{% include hero.html
+   tagline="Cloud-Native AI Engineer & CNCF Kubestronaut"
+   title=site.title
+   subtitle=site.description
+%}
 
 {{ content }}
 
-{% if site.theme_config.show_projects == true %}
-  <h2>{{ site.theme_config.home.title_projects }}</h2>
-  {% include card_list.html collection=site.data.home.project_entries %}
-{% endif %}
-
-{% if site.theme_config.show_misc_list == true %}
-  <h2>{{ site.theme_config.home.title_misc_list }}</h2>
-  {% include vertical_list.html collection=site.data.home.misc_entries %}
-{% endif %}
-
-{% if site.theme_config.show_blog == true %}
-  <h2>{{ site.theme_config.home.title_blog }}</h2>
-  {% include post_list.html %}
-{% endif %}
-
-{% if site.theme_config.show_old_projects == true %}
-  <h2>{{ site.theme_config.home.title_old_projects }}</h2>
-  {% include card_list.html collection=site.data.home.old_project_entries %}
-{% endif %}
-
+<!-- Cyberpunk Terminal Section -->
+<section class="section">
+  {% include terminal.html %}
+</section>
 
 {% if site.theme_config.show_footer == true %}
-  <footer>
-    <div class="dashed"></div>
-    {% include horizontal_list.html collection=site.data.home.footer_entries %}
-  </footer>
+<footer class="site-footer">
+  <div class="site-footer__links">
+    {% for item in site.data.home.footer_entries %}
+    <a href="{{ item.url }}" class="site-footer__link" {% if item.url contains "http" %}target="_blank" rel="noopener noreferrer"{% endif %}>
+      {{ item.title }}
+    </a>
+    {% endfor %}
+  </div>
+</footer>
 {% endif %}
