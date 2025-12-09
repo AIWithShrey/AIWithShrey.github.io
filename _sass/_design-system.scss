@@ -376,3 +376,40 @@ button:focus-visible {
     }
   }
 }
+
+// Share Buttons
+.share-buttons {
+  display: flex;
+  gap: var(--space-3);
+  margin: var(--space-4) 0;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition-fast);
+
+  &:hover {
+    color: var(--color-cyan);
+    border-color: var(--color-cyan);
+    box-shadow: 0 0 10px var(--color-cyan-glow);
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.copy-btn.copied {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}

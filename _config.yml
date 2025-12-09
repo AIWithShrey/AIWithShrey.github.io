@@ -47,9 +47,6 @@ theme_config:
     title_misc_list: Details
     title_blog: Latest Posts
 
-soopr:
-  publish_token: ""  # Injected from SOOPR_PUBLISH_TOKEN secret during build
-
 highlighter: rouge
 
 sass:
