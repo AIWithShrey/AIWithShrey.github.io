@@ -94,8 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
       url: "{{ post.url | relative_url }}",
       date: "{{ post.date | date: '%Y-%m-%d' }}"
     }{% unless forloop.last %},{% endunless %}
-    {% endfor %}
-    ,
+    {% endfor %}{% if site.posts.size > 0 and site.data.publications.publications.size > 0 %},{% endif %}
     {% for article in site.data.publications.publications limit:5 %}
     {
       title: {{ article.title | jsonify }},
