@@ -3,3 +3,8 @@
 .jekyll-cache
 .sass-cache
 _site
+vendor/
+
+# Cloudflare Worker secrets
+cloudflare-worker/SYSTEM_PROMPT.txt
+cloudflare-worker/.wrangler/

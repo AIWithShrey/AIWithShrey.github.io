@@ -5,8 +5,9 @@
       <span class="terminal-button yellow"></span>
       <span class="terminal-button green"></span>
     </div>
-    <div class="terminal-title">shreyas@k8s-controlplane:~</div>
+    <div class="terminal-title">K.E.R.N.E.L. // shreyas@k8s-controlplane</div>
   </div>
+  <canvas id="globe-canvas"></canvas>
   <div class="terminal-body" id="terminal-output">
     <!-- Content injected by JS -->
   </div>
@@ -20,33 +21,108 @@
 document.addEventListener('DOMContentLoaded', () => {
   const output = document.getElementById('terminal-output');
   const input = document.getElementById('terminal-input');
-  
+  const startTime = Date.now();
+
+  // ============ ROTATING ASCII GLOBE ============
+  const globeCanvas = document.getElementById('globe-canvas');
+  const globeCtx = globeCanvas.getContext('2d');
+
+  function initGlobe() {
+    const terminalBody = document.getElementById('terminal-output');
+    globeCanvas.width = terminalBody.offsetWidth;
+    globeCanvas.height = terminalBody.offsetHeight;
+    globeCanvas.style.top = terminalBody.offsetTop + 'px';
+    globeCanvas.style.left = terminalBody.offsetLeft + 'px';
+    globeCanvas.style.opacity = '0.08';
+  }
+
+  // Globe parameters
+  let globeAngle = 0;
+  const chars = '.,-~:;=!*#$@';
+
+  function renderGlobe() {
+    const width = globeCanvas.width;
+    const height = globeCanvas.height;
+    const centerX = width / 2;
+    const centerY = height / 2;
+    const radius = Math.min(width, height) * 0.4;
+
+    globeCtx.clearRect(0, 0, width, height);
+    globeCtx.font = '10px JetBrains Mono, monospace';
+    globeCtx.fillStyle = '#f2e900';
+
+    const A = globeAngle;
+    const B = globeAngle * 0.5;
+
+    // Render sphere using ASCII
+    for (let theta = 0; theta < Math.PI * 2; theta += 0.07) {
+      for (let phi = 0; phi < Math.PI; phi += 0.07) {
+        // 3D sphere coordinates
+        const x = Math.sin(phi) * Math.cos(theta);
+        const y = Math.sin(phi) * Math.sin(theta);
+        const z = Math.cos(phi);
+
+        // Rotate around Y axis
+        const x1 = x * Math.cos(A) - z * Math.sin(A);
+        const z1 = x * Math.sin(A) + z * Math.cos(A);
+
+        // Rotate around X axis
+        const y1 = y * Math.cos(B) - z1 * Math.sin(B);
+        const z2 = y * Math.sin(B) + z1 * Math.cos(B);
+
+        // Only render front-facing points
+        if (z2 > -0.2) {
+          const screenX = centerX + x1 * radius;
+          const screenY = centerY + y1 * radius;
+
+          // Calculate luminance based on position
+          const lum = z2 + 0.5;
+          const charIdx = Math.floor(lum * (chars.length - 1));
+          const char = chars[Math.max(0, Math.min(chars.length - 1, charIdx))];
+
+          // Add some landmass patterns
+          const landPattern = Math.sin(theta * 3 + phi * 2) * Math.cos(phi * 4);
+          if (landPattern > 0.3) {
+            globeCtx.fillStyle = '#00f0ff';
+          } else {
+            globeCtx.fillStyle = '#f2e900';
+          }
+
+          globeCtx.fillText(char, screenX, screenY);
+        }
+      }
+    }
+
+    globeAngle += 0.008;
+    requestAnimationFrame(renderGlobe);
+  }
+
+  initGlobe();
+  renderGlobe();
+
+  // Resize handler
+  window.addEventListener('resize', initGlobe);
+  // ============ END GLOBE ============
+
+  // AI Chatbot configuration
+  // IMPORTANT: Replace this URL with your Cloudflare Worker URL after deployment
+  const AI_API_URL = 'https://shreyas-ai-chatbot.aiwithshrey.workers.dev';
+  let chatHistory = [];
+
+  // Command history
+  let commandHistory = JSON.parse(sessionStorage.getItem('terminalHistory') || '[]');
+  let historyIndex = -1;
+  let tempInput = '';
+
   const bootSequence = [
     { text: 'Initializing connection to satellite uplink...', delay: 500 },
     { text: 'Resolving host aiwithshrey.github.io...', delay: 800 },
     { text: 'Handshake successful. Encryption: AES-256-GCM.', delay: 400 },
     { text: 'Loading system modules: [KUBERNETES, TENSORFLOW, GO, PYTHON]... OK.', delay: 1000 },
+    { text: '<span style="color: #00f0ff;">K.E.R.N.E.L.</span> online. <span style="opacity: 0.6;">(Knowledge Engine for Response, Navigation & Enhanced Learning)</span>', delay: 600 },
     { text: 'Welcome, guest user.', delay: 500 },
-    { text: 'Type <span class="cmd">help</span> to view available commands.', delay: 0 }
+    { text: 'Type <span class="cmd">help</span> to view commands or <span class="cmd">ask</span> to chat with K.E.R.N.E.L.', delay: 0 }
   ];
-
-  async function typeWriter(text, element, speed = 30) {
-    // If text contains HTML, append it directly for now to simplify
-    if (text.includes('<')) {
-      element.innerHTML += text + '<br>';
-      output.scrollTop = output.scrollHeight;
-      return;
-    }
-
-    const line = document.createElement('div');
-    element.appendChild(line);
-    
-    for (let i = 0; i < text.length; i++) {
-      line.textContent += text.charAt(i);
-      output.scrollTop = output.scrollHeight;
-      await new Promise(r => setTimeout(r, speed));
-    }
-  }
 
   async function runBootSequence() {
     for (const step of bootSequence) {
@@ -59,15 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Data Injection from Jekyll
-  /**
-   * @typedef {Object} ProjectItem
-   * @property {string} title
-   * @property {string} url
-   */
-
-  /**
-   * @type {ProjectItem[]}
-   */
   const projectsData = [
     {% for project in site.data.projects.featured limit:5 %}
     {
@@ -77,16 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
     {% endfor %}
   ];
 
-  /**
-   * @typedef {Object} ArticleItem
-   * @property {string} title
-   * @property {string} url
-   * @property {string} date
-   */
-
-  /**
-   * @type {ArticleItem[]}
-   */
   const articlesData = [
     {% for post in site.posts limit:5 %}
     {
@@ -104,30 +161,67 @@ document.addEventListener('DOMContentLoaded', () => {
     {% endfor %}
   ];
 
-  /**
-   * Formats a list of items for display in the terminal.
-   * @param {Array<{title: string, url: string, date?: string}>} list - List of items to display.
-   * @param {string} viewAllUrl - URL for the 'View All' link.
-   * @param {string} type - Type of items (e.g., 'Projects').
-   * @returns {string} HTML string for the list.
-   */
+  const certsData = [
+    {% for cert in site.data.certifications.certifications %}
+    {
+      title: {{ cert.title | jsonify }},
+      issuer: {{ cert.issuer | jsonify }},
+      date: {{ cert.date | jsonify }},
+      url: {{ cert.credential_url | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ];
+
+  const socialData = [
+    {% for entry in site.data.home.footer_entries %}
+    {
+      title: {{ entry.title | jsonify }},
+      url: {{ entry.url | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ];
+
+  const navPages = [
+    {% for entry in site.data.home.navbar_entries %}
+    {
+      title: {{ entry.title | jsonify }},
+      url: {{ entry.url | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ];
+
+  // Skills data (from about.md)
+  const skillsData = {
+    'Infrastructure & Cloud Native': ['Kubernetes', 'Kyverno', 'OPA', 'Helm', 'Argo', 'Terraform', 'Docker', 'AWS', 'Azure'],
+    'AI/ML & Development': ['TensorFlow', 'PyTorch', 'LangChain', 'LangGraph', 'CrewAI', 'RAG', 'Multi-agent systems'],
+    'Languages': ['Go', 'Python', 'YAML', 'CEL']
+  };
+
+  // Fortune quotes
+  const fortunes = [
+    "There are only two hard things in CS: cache invalidation and naming things.",
+    "It works on my machine. Ship your machine then.",
+    "The best code is no code at all.",
+    "In theory, theory and practice are the same. In practice, they are not.",
+    "First, solve the problem. Then, write the code.",
+    "Kubernetes: because managing one computer was too simple.",
+    "YAML: Yet Another Markup Language that will hurt you.",
+    "The cloud is just someone else's computer.",
+    "There is no cloud, only other people's computers.",
+    "sudo make me a sandwich",
+    "It's not a bug, it's an undocumented feature.",
+    "99 bugs in the code, take one down, patch it around... 127 bugs in the code."
+  ];
+
   function formatList(list, viewAllUrl, type) {
-    // Remove empty entries if any comma logic failed
     let cleanList = list.filter(item => item && item.title);
-    
     if (!cleanList || cleanList.length === 0) return `No ${type.toLowerCase()} found.`;
 
-    // Sort by date descending if date exists
     if (cleanList.some(item => item.date)) {
-        cleanList.sort((a, b) => {
-            const dateA = new Date(a.date || 0);
-            const dateB = new Date(b.date || 0);
-            return dateB - dateA;
-        });
+      cleanList.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
     }
-    
+
     let html = '<div class="ls-output" style="margin-top: 8px; margin-bottom: 8px;">';
-    // Show top 5 combined
     cleanList.slice(0, 8).forEach(item => {
       html += `<div style="margin-bottom: 4px;">> <a href="${item.url}" target="_blank" class="link">${item.title}</a></div>`;
     });
@@ -135,42 +229,456 @@ document.addEventListener('DOMContentLoaded', () => {
     return html;
   }
 
-    const commands = {
-    help: "Available commands:\n  <span class='cmd'>about</span>     - View bio\n  <span class='cmd'>projects</span>  - List featured projects\n  <span class='cmd'>articles</span>  - Read latest posts & publications\n  <span class='cmd'>clear</span>     - Clear terminal\n  <span class='cmd'>contact</span>   - Get contact info",
+  function formatSkills() {
+    let html = '<div style="margin-top: 8px;">';
+    for (const [category, skills] of Object.entries(skillsData)) {
+      html += `<div style="margin-bottom: 8px;"><span class="cmd">${category}</span><br>`;
+      html += skills.map(s => `  - ${s}`).join('<br>');
+      html += '</div>';
+    }
+    html += '</div>';
+    return html;
+  }
+
+  function formatCerts() {
+    if (!certsData.length) return 'No certifications found.';
+    let html = '<div style="margin-top: 8px;">';
+    certsData.forEach(cert => {
+      html += `<div style="margin-bottom: 4px;">> <a href="${cert.url}" target="_blank" class="link">${cert.title}</a> <span style="opacity: 0.6;">(${cert.issuer}, ${cert.date})</span></div>`;
+    });
+    html += '</div>';
+    return html;
+  }
+
+  function formatSocial() {
+    if (!socialData.length) return 'No social links found.';
+    let html = '<div style="margin-top: 8px;">';
+    socialData.forEach(link => {
+      html += `<div style="margin-bottom: 4px;">> <a href="${link.url}" target="_blank" class="link">${link.title}</a></div>`;
+    });
+    html += '</div>';
+    return html;
+  }
+
+  function getUptime() {
+    const diff = Date.now() - startTime;
+    const seconds = Math.floor(diff / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    if (hours > 0) return `${hours}h ${minutes % 60}m ${seconds % 60}s`;
+    if (minutes > 0) return `${minutes}m ${seconds % 60}s`;
+    return `${seconds}s`;
+  }
+
+  function listPages() {
+    let html = '<div style="margin-top: 8px;">Available pages:<br>';
+    navPages.forEach(page => {
+      html += `  <span class="cmd">${page.title.toLowerCase()}</span> - ${page.url}<br>`;
+    });
+    html += '<br>Usage: <span class="cmd">open &lt;page&gt;</span> or <span class="cmd">cd &lt;page&gt;</span></div>';
+    return html;
+  }
+
+  function navigateTo(page) {
+    const pageMap = {};
+    navPages.forEach(p => {
+      pageMap[p.title.toLowerCase()] = p.url;
+    });
+
+    if (!page) return 'Usage: open &lt;page&gt;<br>Type <span class="cmd">ls</span> to see available pages.';
+
+    const url = pageMap[page.toLowerCase()];
+    if (url) {
+      setTimeout(() => { window.location.href = url; }, 500);
+      return `Navigating to ${page}...`;
+    }
+    return `Page not found: ${page}. Type <span class="cmd">ls</span> to see available pages.`;
+  }
+
+  function searchContent(term) {
+    if (!term) return 'Usage: search &lt;term&gt;';
+
+    const allContent = [...projectsData, ...articlesData];
+    const results = allContent.filter(item =>
+      item.title.toLowerCase().includes(term.toLowerCase())
+    );
+
+    if (results.length === 0) return `No results found for "${term}"`;
+
+    let html = `<div style="margin-top: 8px;">Found ${results.length} result(s) for "${term}":<br>`;
+    results.forEach(item => {
+      html += `<div style="margin-bottom: 4px;">> <a href="${item.url}" target="_blank" class="link">${item.title}</a></div>`;
+    });
+    html += '</div>';
+    return html;
+  }
+
+  // AI Chat function
+  async function askAI(question) {
+    if (!question) {
+      return 'Usage: ask &lt;question&gt;<br>Example: <span class="cmd">ask What projects has Shreyas worked on?</span>';
+    }
+
+    // Show typing indicator
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'response-line';
+    typingDiv.innerHTML = '<span style="color: #00f0ff;">[K.E.R.N.E.L.] Processing query<span class="typing-dots">...</span></span>';
+    output.appendChild(typingDiv);
+    output.scrollTop = output.scrollHeight;
+
+    // Add CSS animation for typing dots
+    if (!document.getElementById('typing-animation')) {
+      const style = document.createElement('style');
+      style.id = 'typing-animation';
+      style.textContent = `
+        .typing-dots { animation: blink 1s infinite; }
+        @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+      `;
+      document.head.appendChild(style);
+    }
+
+    try {
+      const response = await fetch(AI_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: question,
+          history: chatHistory
+        })
+      });
+
+      // Remove typing indicator
+      typingDiv.remove();
+
+      if (!response.ok) {
+        throw new Error('AI service unavailable');
+      }
+
+      const data = await response.json();
+      const reply = data.reply || 'Sorry, I could not generate a response.';
+
+      // Update chat history
+      chatHistory.push({ role: 'user', content: question });
+      chatHistory.push({ role: 'assistant', content: reply });
+
+      // Keep only last 10 messages
+      if (chatHistory.length > 20) {
+        chatHistory = chatHistory.slice(-20);
+      }
+
+      return `<span style="color: #00f0ff;">[K.E.R.N.E.L.]</span> ${reply.replace(/\n/g, '<br>')}`;
+    } catch (error) {
+      typingDiv.remove();
+      console.error('AI Chat error:', error);
+      return '<span class="error-line">AI service unavailable. The chatbot may not be configured yet.</span><br><span style="opacity: 0.6;">See: <a href="https://github.com/AIWithShrey/AIWithShrey.github.io/blob/main/cloudflare-worker/README.md" class="link">Setup Instructions</a></span>';
+    }
+  }
+
+  // Easter egg: neofetch
+  function showNeofetch() {
+    return `<pre style="line-height: 1.3; font-size: 12px;">
+    <span style="color: #00f0ff;">    *    </span>     <span class="cmd">shreyas</span>@<span class="cmd">k8s-controlplane</span>
+    <span style="color: #00f0ff;">   /|\\   </span>     -------------------------
+    <span style="color: #00f0ff;">  / | \\  </span>     <span class="cmd">Title:</span> CNCF Kubestronaut
+    <span style="color: #00f0ff;"> /  |  \\ </span>     <span class="cmd">OS:</span> CloudNative Linux x86_64
+    <span style="color: #00f0ff;">/___|___\\</span>     <span class="cmd">Host:</span> Kubernetes v1.31
+    <span style="color: #00f0ff;">   |||   </span>     <span class="cmd">Kernel:</span> Kyverno + OPA
+    <span style="color: #00f0ff;">   |||   </span>     <span class="cmd">Shell:</span> Go 1.22 / Python 3.11
+    <span style="color: #f2e900;">  (@ @)  </span>     <span class="cmd">AI:</span> TensorFlow + PyTorch
+    <span style="color: #f2e900;">   \\_/   </span>     <span class="cmd">Agents:</span> LangChain + CrewAI
+    <span style="color: #f2e900;">  /| |\\  </span>     <span class="cmd">Terminal:</span> aiwithshrey.github.io
+    <span style="color: #f2e900;"> / | | \\ </span>     <span class="cmd">Uptime:</span> ${getUptime()}
+</pre>`;
+  }
+
+  // Easter egg: matrix rain
+  function matrixRain() {
+    const overlay = document.createElement('div');
+    overlay.id = 'matrix-overlay';
+    overlay.style.cssText = `
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: black; z-index: 9999; overflow: hidden;
+      font-family: monospace; font-size: 14px; color: #0f0;
+    `;
+
+    const canvas = document.createElement('canvas');
+    overlay.appendChild(canvas);
+    document.body.appendChild(overlay);
+
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function draw() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#0f0';
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const char = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    const interval = setInterval(draw, 33);
+
+    setTimeout(() => {
+      clearInterval(interval);
+      overlay.remove();
+    }, 3000);
+
+    return 'Wake up, Neo...';
+  }
+
+  // Easter egg: cowsay
+  function cowsay(msg) {
+    const text = msg || 'Moo!';
+    const border = '-'.repeat(text.length + 2);
+    return `<pre style="line-height: 1.2;">
+ ${border}
+< ${text} >
+ ${border}
+        \\   ^__^
+         \\  (oo)\\_______
+            (__)\\       )\\/\\
+                ||----w |
+                ||     ||
+</pre>`;
+  }
+
+  // Easter egg: fake delete
+  async function fakeDelete() {
+    const files = [
+      '/bin/', '/boot/', '/dev/', '/etc/', '/home/',
+      '/lib/', '/media/', '/mnt/', '/opt/', '/proc/',
+      '/root/', '/sbin/', '/srv/', '/sys/', '/tmp/',
+      '/usr/', '/var/'
+    ];
+
+    for (const file of files) {
+      const line = document.createElement('div');
+      line.className = 'error-line';
+      line.textContent = `rm: removing '${file}'...`;
+      output.appendChild(line);
+      output.scrollTop = output.scrollHeight;
+      await new Promise(r => setTimeout(r, 100));
+    }
+
+    const joke = document.createElement('div');
+    joke.innerHTML = '<br><span style="color: #27c93f;">Just kidding! This is a static website. Nice try though.</span>';
+    output.appendChild(joke);
+    output.scrollTop = output.scrollHeight;
+    return '';
+  }
+
+  // All commands
+  const commands = {
+    // Help
+    help: () => `Available commands:
+  <span class="cmd">about</span>      - View bio
+  <span class="cmd">projects</span>   - List featured projects
+  <span class="cmd">articles</span>   - Read latest posts
+  <span class="cmd">skills</span>     - View technical skills
+  <span class="cmd">certs</span>      - View certifications
+  <span class="cmd">social</span>     - Social media links
+  <span class="cmd">resume</span>     - Download resume
+  <span class="cmd">contact</span>    - Get contact info
+  <span class="cmd">clear</span>      - Clear terminal
+
+  <span style="opacity: 0.6;">Navigation:</span>
+  <span class="cmd">ls</span>         - List available pages
+  <span class="cmd">open</span> &lt;page&gt; - Navigate to page
+  <span class="cmd">cd</span> &lt;page&gt;   - Navigate to page
+  <span class="cmd">search</span> &lt;q&gt; - Search content
+
+  <span style="opacity: 0.6;">Fun:</span>
+  <span class="cmd">whoami</span>     - Who am I?
+  <span class="cmd">uptime</span>     - Session uptime
+  <span class="cmd">neofetch</span>   - System info
+  <span class="cmd">fortune</span>    - Random quote
+
+  <span style="opacity: 0.6; color: #00f0ff;">K.E.R.N.E.L.:</span>
+  <span class="cmd">ask</span> &lt;question&gt; - Ask K.E.R.N.E.L. about Shreyas`,
+
+    // Content commands
     about: "Cloud-Native AI Engineer & CNCF Kubestronaut.\nBuilding production AI systems for Kubernetes governance at Nirmata.",
-    contact: "Email: shreyas@example.com\nGitHub: github.com/AIWithShrey",
-    clear: () => { output.innerHTML = ''; return ''; },
+    contact: "Email: shreyas@shreyasm.com\nGitHub: <a href='https://github.com/aiwithshrey' class='link'>github.com/aiwithshrey</a>",
     projects: () => formatList(projectsData, '/projects', 'Projects'),
-    articles: () => formatList(articlesData, '/articles', 'Articles')
+    articles: () => formatList(articlesData, '/articles', 'Articles'),
+    skills: formatSkills,
+    certs: formatCerts,
+    certifications: formatCerts,
+    social: formatSocial,
+    resume: () => `Download: <a href="/assets/resume.pdf" target="_blank" class="link">resume.pdf</a>`,
+    cv: () => commands.resume(),
+    whoami: "shreyas - Cloud-Native AI Engineer, Kubestronaut, Builder of AI systems that actually work in production.",
+    uptime: () => `Session uptime: ${getUptime()}`,
+
+    // Navigation
+    ls: listPages,
+    dir: listPages,
+    open: (args) => navigateTo(args),
+    cd: (args) => navigateTo(args),
+    search: (args) => searchContent(args),
+    grep: (args) => searchContent(args),
+
+    // Clear
+    clear: () => { output.innerHTML = ''; return ''; },
+
+    // Easter eggs
+    sudo: "Nice try. This incident will be reported.",
+    'sudo su': "Permission denied. You are not in the sudoers file.",
+    'rm -rf /': fakeDelete,
+    'rm -rf /*': fakeDelete,
+    neofetch: showNeofetch,
+    matrix: matrixRain,
+    fortune: () => fortunes[Math.floor(Math.random() * fortunes.length)],
+    cowsay: (args) => cowsay(args),
+    moo: () => cowsay('Moo!'),
+    exit: "There is no escape. You're trapped in the terminal forever.",
+    quit: "You can check out any time you like, but you can never leave.",
+    vim: "You're now stuck in vim. Good luck getting out. (Hint: :q!)",
+    emacs: "M-x butterfly... Just kidding. Use vim.",
+    nano: "Finally, someone with taste.",
+    hack: "ACCESS DENIED. FBI has been notified. Expect a visit soon.",
+    ping: () => `PING google.com (142.250.80.46): 56 data bytes
+64 bytes from 142.250.80.46: icmp_seq=0 ttl=117 time=12.3 ms
+64 bytes from 142.250.80.46: icmp_seq=1 ttl=117 time=11.8 ms
+--- google.com ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss`,
+    hello: "Hello, World!",
+    hi: "Hey there! Type 'help' to see what I can do.",
+    '': () => '',
+
+    // AI Chat
+    ask: (args) => askAI(args),
+    chat: (args) => askAI(args),
+    ai: (args) => askAI(args)
   };
+
+  // Get all command names for autocomplete
+  const commandNames = Object.keys(commands).filter(c => c !== '');
+
+  function processCommand(cmdLine) {
+    const parts = cmdLine.trim().split(/\s+/);
+    const cmd = parts[0].toLowerCase();
+    const args = parts.slice(1).join(' ');
+
+    // Check for exact command match first
+    if (commands[cmdLine.toLowerCase()]) {
+      const handler = commands[cmdLine.toLowerCase()];
+      return typeof handler === 'function' ? handler() : handler;
+    }
+
+    // Then check for command with args
+    if (commands[cmd]) {
+      const handler = commands[cmd];
+      if (typeof handler === 'function') {
+        return handler(args);
+      }
+      return handler;
+    }
+
+    return null;
+  }
+
+  // Input handling
+  input.addEventListener('keydown', (e) => {
+    // Command history navigation
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (commandHistory.length === 0) return;
+
+      if (historyIndex === -1) {
+        tempInput = input.value;
+        historyIndex = commandHistory.length - 1;
+      } else if (historyIndex > 0) {
+        historyIndex--;
+      }
+      input.value = commandHistory[historyIndex];
+    }
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (historyIndex === -1) return;
+
+      if (historyIndex < commandHistory.length - 1) {
+        historyIndex++;
+        input.value = commandHistory[historyIndex];
+      } else {
+        historyIndex = -1;
+        input.value = tempInput;
+      }
+    }
+
+    // Tab completion
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      const current = input.value.toLowerCase().trim();
+      if (!current) return;
+
+      const matches = commandNames.filter(c => c.startsWith(current));
+      if (matches.length === 1) {
+        input.value = matches[0];
+      } else if (matches.length > 1) {
+        // Show suggestions
+        const suggestions = document.createElement('div');
+        suggestions.style.opacity = '0.6';
+        suggestions.textContent = matches.join('  ');
+        output.appendChild(suggestions);
+        output.scrollTop = output.scrollHeight;
+      }
+    }
+  });
 
   input.addEventListener('keypress', async (e) => {
     if (e.key === 'Enter') {
-      const cmd = input.value.trim().toLowerCase();
+      const cmdLine = input.value.trim();
       input.value = '';
-      
+      historyIndex = -1;
+
+      // Add to history
+      if (cmdLine && (commandHistory.length === 0 || commandHistory[commandHistory.length - 1] !== cmdLine)) {
+        commandHistory.push(cmdLine);
+        sessionStorage.setItem('terminalHistory', JSON.stringify(commandHistory.slice(-50)));
+      }
+
       // Echo command
       const echo = document.createElement('div');
       echo.className = 'echo-line';
-      echo.innerHTML = `<span class="prompt">shreyas@k8s-controlplane:~$</span> ${cmd}`;
+      echo.innerHTML = `<span class="prompt">shreyas@k8s-controlplane:~$</span> ${cmdLine}`;
       output.appendChild(echo);
 
       // Process command
-      if (commands[cmd]) {
-        const response = typeof commands[cmd] === 'function' ? commands[cmd]() : commands[cmd];
-        if (response) {
-          const respDiv = document.createElement('div');
-          respDiv.className = 'response-line';
-          respDiv.innerHTML = response; // Allow HTML
-          output.appendChild(respDiv);
-        }
-      } else if (cmd !== '') {
+      let result = processCommand(cmdLine);
+
+      // Handle async commands (like AI chat)
+      if (result instanceof Promise) {
+        result = await result;
+      }
+
+      if (result !== null && result !== '') {
+        const respDiv = document.createElement('div');
+        respDiv.className = 'response-line';
+        respDiv.innerHTML = result;
+        output.appendChild(respDiv);
+      } else if (cmdLine !== '' && result === null) {
         const error = document.createElement('div');
         error.className = 'error-line';
-        error.textContent = `Command not found: ${cmd}. Type 'help' for list.`;
+        error.textContent = `Command not found: ${cmdLine.split(' ')[0]}. Type 'help' for available commands.`;
         output.appendChild(error);
       }
-      
+
       output.scrollTop = output.scrollHeight;
     }
   });
@@ -183,4 +691,3 @@ document.addEventListener('DOMContentLoaded', () => {
   runBootSequence();
 });
 </script>
-

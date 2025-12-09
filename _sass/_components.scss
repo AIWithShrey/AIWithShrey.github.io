@@ -480,6 +480,7 @@
 
 // Terminal Component
 .terminal-window {
+  position: relative;
   max-width: 900px;
   margin: var(--space-2) auto var(--space-12);
   background: rgba(10, 10, 10, 0.9);
@@ -490,6 +491,12 @@
   overflow: hidden;
   backdrop-filter: blur(10px);
   animation: fade-in-up 1s ease-out;
+
+  #globe-canvas {
+    position: absolute;
+    pointer-events: none;
+    z-index: 0;
+  }
 }
 
 .terminal-header {
@@ -525,6 +532,8 @@
 }
 
 .terminal-body {
+  position: relative;
+  z-index: 1;
   padding: var(--space-4);
   height: 500px;
   overflow-y: auto;
@@ -565,6 +574,8 @@
 }
 
 .terminal-input-line {
+  position: relative;
+  z-index: 1;
   display: flex;
   padding: var(--space-2) var(--space-4) var(--space-4);
   align-items: center;
@@ -743,10 +754,6 @@
 // CRT Terminal Enhancement
 .terminal-window--crt {
   @include crt-scanlines(0.015);
-
-  .terminal-body {
-    text-shadow: 0 0 2px var(--color-primary-light);
-  }
 }
 
 // Wireframe Grid Background Section
