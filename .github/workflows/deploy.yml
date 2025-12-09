@@ -22,9 +22,12 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Inject Soopr token
-        if: ${{ secrets.SOOPR_PUBLISH_TOKEN != '' }}
         run: |
-          sed -i 's/publish_token: ""/publish_token: "${{ secrets.SOOPR_PUBLISH_TOKEN }}"/' _config.yml
+          if [ -n "$SOOPR_TOKEN" ]; then
+            sed -i "s/publish_token: \"\"/publish_token: \"$SOOPR_TOKEN\"/" _config.yml
+          fi
+        env:
+          SOOPR_TOKEN: ${{ secrets.SOOPR_PUBLISH_TOKEN }}
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
