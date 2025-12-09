@@ -48,7 +48,7 @@ theme_config:
     title_blog: Latest Posts
 
 soopr:
-  publish_token: "pt_cdef02bf88d6fe75743965bd47467d16"
+  publish_token: ""  # Injected from SOOPR_PUBLISH_TOKEN secret during build
 
 highlighter: rouge
 
