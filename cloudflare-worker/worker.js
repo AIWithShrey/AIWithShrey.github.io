@@ -1,9 +1,9 @@
 /**
  * Cloudflare Worker for K.E.R.N.E.L. - Shreyas's AI Chatbot
- * Proxies requests to Gemini API
+ * Proxies requests to Groq API
  *
  * Environment Variables Required:
- * - GEMINI_API_KEY: Your Google Gemini API key
+ * - GROQ_API_KEY: Your Groq API key
  * - SYSTEM_PROMPT: The system prompt for the AI (kept private)
  */
 
@@ -42,53 +42,50 @@ export default {
         });
       }
 
-      // Build conversation for Gemini
-      const contents = [];
+      // Build messages for Groq (OpenAI-compatible format)
+      const messages = [
+        {
+          role: 'system',
+          content: env.SYSTEM_PROMPT
+        }
+      ];
 
       // Add conversation history
-      for (const msg of history.slice(-10)) { // Keep last 10 messages for context
-        contents.push({
-          role: msg.role === 'user' ? 'user' : 'model',
-          parts: [{ text: msg.content }]
+      for (const msg of history.slice(-10)) {
+        messages.push({
+          role: msg.role === 'user' ? 'user' : 'assistant',
+          content: msg.content
         });
       }
 
       // Add current message
-      contents.push({
+      messages.push({
         role: 'user',
-        parts: [{ text: message }]
+        content: message
       });
 
-      // Call Gemini API
-      const geminiResponse = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${env.GEMINI_API_KEY}`,
+      // Call Groq API
+      const groqResponse = await fetch(
+        'https://api.groq.com/openai/v1/chat/completions',
         {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Authorization': `Bearer ${env.GROQ_API_KEY}`,
+            'Content-Type': 'application/json'
+          },
           body: JSON.stringify({
-            system_instruction: {
-              parts: [{ text: env.SYSTEM_PROMPT }]
-            },
-            contents: contents,
-            generationConfig: {
-              temperature: 0.7,
-              topK: 40,
-              topP: 0.95,
-              maxOutputTokens: 500,
-            },
-            safetySettings: [
-              { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
-              { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
-              { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
-              { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
-            ],
+            model: 'qwen/qwen3-32b',
+            messages: messages,
+            temperature: 0.5,
+            max_tokens: 500,
+            reasoning_effort: 'none'
           }),
         }
       );
 
-      if (!geminiResponse.ok) {
-        const error = await geminiResponse.text();
-        console.error('Gemini API error:', error);
+      if (!groqResponse.ok) {
+        const error = await groqResponse.text();
+        console.error('Groq API error:', error);
         return new Response(JSON.stringify({ error: 'AI service error' }), {
           status: 500,
           headers: {
@@ -98,8 +95,8 @@ export default {
         });
       }
 
-      const data = await geminiResponse.json();
-      const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Sorry, I could not generate a response.';
+      const data = await groqResponse.json();
+      const reply = data.choices?.[0]?.message?.content || 'Sorry, I could not generate a response.';
 
       return new Response(JSON.stringify({ reply }), {
         headers: {

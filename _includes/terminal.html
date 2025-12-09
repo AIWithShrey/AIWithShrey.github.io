@@ -313,6 +313,31 @@ document.addEventListener('DOMContentLoaded', () => {
     return html;
   }
 
+  // Simple markdown to HTML converter for AI responses
+  function parseMarkdown(text) {
+    return text
+      // Headers: ### text
+      .replace(/^### (.+)$/gm, '<span class="cmd" style="font-size: 1.1em;">$1</span>')
+      .replace(/^## (.+)$/gm, '<span class="cmd" style="font-size: 1.2em;">$1</span>')
+      .replace(/^# (.+)$/gm, '<span class="cmd" style="font-size: 1.3em;">$1</span>')
+      // Horizontal rules: ---
+      .replace(/^---$/gm, '<hr style="border: none; border-top: 1px solid rgba(255,255,255,0.2); margin: 8px 0;">')
+      // Bold: **text** or __text__
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/__(.+?)__/g, '<strong>$1</strong>')
+      // Italic: *text* or _text_ (but not list items)
+      .replace(/(?<!^|\n)\*([^\*\n]+)\*/g, '<em>$1</em>')
+      .replace(/(?<!^|\n)_([^_\n]+)_/g, '<em>$1</em>')
+      // Inline code: `code`
+      .replace(/`([^`]+)`/g, '<code style="background: rgba(255,255,255,0.1); padding: 2px 4px; border-radius: 3px;">$1</code>')
+      // Links: [text](url)
+      .replace(/\[([^\]]+)\]\(([^\)]+)\)/g, '<a href="$2" target="_blank" class="link">$1</a>')
+      // Bullet lists: - item
+      .replace(/^- (.+)$/gm, '• $1')
+      // Line breaks
+      .replace(/\n/g, '<br>');
+  }
+
   // AI Chat function
   async function askAI(question) {
     if (!question) {
@@ -366,7 +391,7 @@ document.addEventListener('DOMContentLoaded', () => {
         chatHistory = chatHistory.slice(-20);
       }
 
-      return `<span style="color: #00f0ff;">[K.E.R.N.E.L.]</span> ${reply.replace(/\n/g, '<br>')}`;
+      return `<span style="color: #00f0ff;">[K.E.R.N.E.L.]</span> ${parseMarkdown(reply)}`;
     } catch (error) {
       typingDiv.remove();
       console.error('AI Chat error:', error);
