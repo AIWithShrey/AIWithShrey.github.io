@@ -1,0 +1,186 @@
+<div class="terminal-window terminal-window--crt reveal">
+  <div class="terminal-header">
+    <div class="terminal-buttons">
+      <span class="terminal-button red"></span>
+      <span class="terminal-button yellow"></span>
+      <span class="terminal-button green"></span>
+    </div>
+    <div class="terminal-title">shreyas@k8s-controlplane:~</div>
+  </div>
+  <div class="terminal-body" id="terminal-output">
+    <!-- Content injected by JS -->
+  </div>
+  <div class="terminal-input-line">
+    <span class="prompt">shreyas@k8s-controlplane:~$</span>
+    <input type="text" id="terminal-input" autocomplete="off" spellcheck="false" autofocus>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const output = document.getElementById('terminal-output');
+  const input = document.getElementById('terminal-input');
+  
+  const bootSequence = [
+    { text: 'Initializing connection to satellite uplink...', delay: 500 },
+    { text: 'Resolving host aiwithshrey.github.io...', delay: 800 },
+    { text: 'Handshake successful. Encryption: AES-256-GCM.', delay: 400 },
+    { text: 'Loading system modules: [KUBERNETES, TENSORFLOW, GO, PYTHON]... OK.', delay: 1000 },
+    { text: 'Welcome, guest user.', delay: 500 },
+    { text: 'Type <span class="cmd">help</span> to view available commands.', delay: 0 }
+  ];
+
+  async function typeWriter(text, element, speed = 30) {
+    // If text contains HTML, append it directly for now to simplify
+    if (text.includes('<')) {
+      element.innerHTML += text + '<br>';
+      output.scrollTop = output.scrollHeight;
+      return;
+    }
+
+    const line = document.createElement('div');
+    element.appendChild(line);
+    
+    for (let i = 0; i < text.length; i++) {
+      line.textContent += text.charAt(i);
+      output.scrollTop = output.scrollHeight;
+      await new Promise(r => setTimeout(r, speed));
+    }
+  }
+
+  async function runBootSequence() {
+    for (const step of bootSequence) {
+      await new Promise(r => setTimeout(r, step.delay));
+      const line = document.createElement('div');
+      line.innerHTML = step.text;
+      output.appendChild(line);
+      output.scrollTop = output.scrollHeight;
+    }
+  }
+
+  // Data Injection from Jekyll
+  /**
+   * @typedef {Object} ProjectItem
+   * @property {string} title
+   * @property {string} url
+   */
+
+  /**
+   * @type {ProjectItem[]}
+   */
+  const projectsData = [
+    {% for project in site.data.projects.featured limit:5 %}
+    {
+      title: {{ project.title | jsonify }},
+      url: {{ project.url | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ];
+
+  /**
+   * @typedef {Object} ArticleItem
+   * @property {string} title
+   * @property {string} url
+   * @property {string} date
+   */
+
+  /**
+   * @type {ArticleItem[]}
+   */
+  const articlesData = [
+    {% for post in site.posts limit:5 %}
+    {
+      title: {{ post.title | jsonify }},
+      url: "{{ post.url | relative_url }}",
+      date: "{{ post.date | date: '%Y-%m-%d' }}"
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}{% if site.posts.size > 0 and site.data.publications.publications.size > 0 %},{% endif %}
+    {% for article in site.data.publications.publications limit:5 %}
+    {
+      title: {{ article.title | jsonify }},
+      url: {{ article.url | jsonify }},
+      date: "{{ article.date | date: '%Y-%m-%d' }}"
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ];
+
+  /**
+   * Formats a list of items for display in the terminal.
+   * @param {Array<{title: string, url: string, date?: string}>} list - List of items to display.
+   * @param {string} viewAllUrl - URL for the 'View All' link.
+   * @param {string} type - Type of items (e.g., 'Projects').
+   * @returns {string} HTML string for the list.
+   */
+  function formatList(list, viewAllUrl, type) {
+    // Remove empty entries if any comma logic failed
+    let cleanList = list.filter(item => item && item.title);
+    
+    if (!cleanList || cleanList.length === 0) return `No ${type.toLowerCase()} found.`;
+
+    // Sort by date descending if date exists
+    if (cleanList.some(item => item.date)) {
+        cleanList.sort((a, b) => {
+            const dateA = new Date(a.date || 0);
+            const dateB = new Date(b.date || 0);
+            return dateB - dateA;
+        });
+    }
+    
+    let html = '<div class="ls-output" style="margin-top: 8px; margin-bottom: 8px;">';
+    // Show top 5 combined
+    cleanList.slice(0, 8).forEach(item => {
+      html += `<div style="margin-bottom: 4px;">> <a href="${item.url}" target="_blank" class="link">${item.title}</a></div>`;
+    });
+    html += `</div><div class="view-all">> <a href="${viewAllUrl}" class="link">[View All ${type}]</a></div>`;
+    return html;
+  }
+
+    const commands = {
+    help: "Available commands:\n  <span class='cmd'>about</span>     - View bio\n  <span class='cmd'>projects</span>  - List featured projects\n  <span class='cmd'>articles</span>  - Read latest posts & publications\n  <span class='cmd'>clear</span>     - Clear terminal\n  <span class='cmd'>contact</span>   - Get contact info",
+    about: "Cloud-Native AI Engineer & CNCF Kubestronaut.\nBuilding production AI systems for Kubernetes governance at Nirmata.",
+    contact: "Email: shreyas@example.com\nGitHub: github.com/AIWithShrey",
+    clear: () => { output.innerHTML = ''; return ''; },
+    projects: () => formatList(projectsData, '/projects', 'Projects'),
+    articles: () => formatList(articlesData, '/articles', 'Articles')
+  };
+
+  input.addEventListener('keypress', async (e) => {
+    if (e.key === 'Enter') {
+      const cmd = input.value.trim().toLowerCase();
+      input.value = '';
+      
+      // Echo command
+      const echo = document.createElement('div');
+      echo.className = 'echo-line';
+      echo.innerHTML = `<span class="prompt">shreyas@k8s-controlplane:~$</span> ${cmd}`;
+      output.appendChild(echo);
+
+      // Process command
+      if (commands[cmd]) {
+        const response = typeof commands[cmd] === 'function' ? commands[cmd]() : commands[cmd];
+        if (response) {
+          const respDiv = document.createElement('div');
+          respDiv.className = 'response-line';
+          respDiv.innerHTML = response; // Allow HTML
+          output.appendChild(respDiv);
+        }
+      } else if (cmd !== '') {
+        const error = document.createElement('div');
+        error.className = 'error-line';
+        error.textContent = `Command not found: ${cmd}. Type 'help' for list.`;
+        output.appendChild(error);
+      }
+      
+      output.scrollTop = output.scrollHeight;
+    }
+  });
+
+  // Focus input when clicking terminal
+  document.querySelector('.terminal-window').addEventListener('click', () => {
+    input.focus();
+  });
+
+  runBootSequence();
+});
+</script>
+

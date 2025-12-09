@@ -1,0 +1,32 @@
+{% for pub in site.data.publications.publications %}
+{% assign pub_link = pub.url %}
+{% if pub.internal_url %}
+  {% assign pub_link = pub.internal_url | relative_url %}
+{% endif %}
+
+{% if pub_link %}
+<a href="{{ pub_link }}" {% unless pub.internal_url %}target="_blank" rel="noopener noreferrer"{% endunless %} class="modern-card-link" style="display: block; margin-bottom: 2rem;">
+{% endif %}
+
+<article class="publication">
+  <p class="publication__venue">{{ pub.venue }}</p>
+
+  <h3 class="publication__title">
+    {{ pub.title }}
+  </h3>
+
+  <p class="publication__description">{{ pub.description }}</p>
+
+  <p class="publication__date">Published: {{ pub.date }}</p>
+
+  {% if pub.url %}
+  <span class="btn btn--outline" style="margin-top: var(--space-4);">
+    Read on {{ pub.venue }} &rarr;
+  </span>
+  {% endif %}
+</article>
+
+{% if pub_link %}
+</a>
+{% endif %}
+{% endfor %}

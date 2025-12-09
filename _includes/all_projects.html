@@ -1,0 +1,21 @@
+<div class="project-grid">
+  {% for project in site.data.projects.all %}
+  <a href="{{ project.url }}" target="_blank" rel="noopener noreferrer" class="modern-card-link">
+    <article class="modern-card">
+      <h3 class="modern-card__title">
+        {{ project.title }}
+      </h3>
+
+      <p class="modern-card__description">
+        {{ project.description }}
+      </p>
+
+      <div class="modern-card__meta">
+        {% for tag in project.tags %}
+        <span class="modern-card__tag">{{ tag }}</span>
+        {% endfor %}
+      </div>
+    </article>
+  </a>
+  {% endfor %}
+</div>

@@ -1,0 +1,13 @@
+<section class="hero reveal">
+  <p class="hero__tagline">{{ include.tagline | default: "Cloud-Native AI Engineer" }}</p>
+  <h1 class="hero__title" data-text="{{ include.title | default: site.title }}">{{ include.title | default: site.title }}</h1>
+  <p class="hero__subtitle">{{ include.subtitle | default: site.description }}</p>
+
+  {% if include.badges %}
+  <div class="hero__badges">
+    {% for badge in include.badges %}
+    <span class="badge{% cycle '', ' badge--cyber', ' badge--magenta' %}">{{ badge }}</span>
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>

@@ -1,0 +1,24 @@
+---
+layout: default
+---
+
+<header class="page-header">
+  <h1 class="page-header__title">{{ page.title }}</h1>
+  {% if page.description %}
+  <p class="page-header__description">{{ page.description }}</p>
+  {% endif %}
+</header>
+
+{{ content }}
+
+{% if site.theme_config.show_footer == true %}
+<footer class="site-footer">
+  <div class="site-footer__links">
+    {% for item in site.data.home.footer_entries %}
+    <a href="{{ item.url }}" class="site-footer__link" {% if item.url contains "http" %}target="_blank" rel="noopener noreferrer"{% endif %}>
+      {{ item.title }}
+    </a>
+    {% endfor %}
+  </div>
+</footer>
+{% endif %}

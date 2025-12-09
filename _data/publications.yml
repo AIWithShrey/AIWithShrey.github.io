@@ -1,0 +1,10 @@
+# Publications and Articles
+
+publications:
+  - title: "Developing an AI Agent for Smart Contextual Q&A"
+    venue: CNCF Blog
+    date: "August 19, 2024"
+    url: https://www.cncf.io/blog/2024/08/19/developing-an-ai-agent-for-smart-contextual-qa/
+    description: Technical deep-dive into building InSightful, a ReAct AI agent that helps tech communities by intelligently retrieving past conversations, searching Stack Overflow, and browsing the web for relevant information.
+    featured: true
+    internal_url: /articles/developing-ai-agent-for-smart-contextual-qa

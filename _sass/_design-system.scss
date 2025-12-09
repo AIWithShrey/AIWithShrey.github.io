@@ -1,0 +1,415 @@
+// Design System - CSS Custom Properties
+// Modern color palette, typography, spacing, and effects
+
+@font-face {
+  font-family: 'Valorax';
+  src: url('/assets/fonts/Valorax.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  // Cyberpunk Palette
+  --color-bg: #050505;
+  --color-bg-secondary: #0a0a0a;
+  --color-bg-tertiary: #111111;
+  --color-primary: #f2e900;       // Yellow
+  --color-primary-dark: #c2ba00;
+  --color-primary-light: #f9f580;
+
+  --color-secondary: #d92031;     // Red
+  --color-secondary-dark: #a61825;
+  --color-secondary-light: #e86672;
+
+  --color-accent: #0aff00;        // Matrix Green
+
+  // NEW: Cyberpunk Expanded Palette
+  --color-cyan: #00f0ff;           // Electric cyan
+  --color-cyan-dark: #00a8b3;
+  --color-cyan-light: #80f7ff;
+  --color-cyan-glow: rgba(0, 240, 255, 0.5);
+
+  --color-magenta: #ff00ff;        // Hot pink/magenta
+  --color-magenta-dark: #b300b3;
+  --color-magenta-light: #ff80ff;
+  --color-magenta-glow: rgba(255, 0, 255, 0.5);
+
+  --color-purple: #9d4edd;         // Neon purple
+  --color-purple-dark: #7b2cbf;
+  --color-purple-light: #c77dff;
+
+  // Faded neon tones (vintage authenticity)
+  --color-faded-cyan: rgba(0, 240, 255, 0.3);
+  --color-faded-magenta: rgba(255, 0, 255, 0.3);
+  --color-faded-yellow: rgba(242, 233, 0, 0.3);
+
+  // Text Colors
+  --text-primary: #ffffff;
+  --text-secondary: #b3b3b3;
+  --text-tertiary: #808080;
+  --text-muted: #4d4d4d;
+
+  // Gradients
+  --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  --gradient-hero: linear-gradient(135deg, rgba(242, 233, 0, 0.2) 0%, rgba(217, 32, 49, 0.2) 100%);
+  --gradient-card: linear-gradient(145deg, rgba(10, 10, 10, 0.6) 0%, rgba(20, 20, 20, 0.4) 100%);
+  --gradient-glow: radial-gradient(circle at center, rgba(242, 233, 0, 0.15) 0%, transparent 70%);
+
+  // NEW: Cyber gradients
+  --gradient-cyber: linear-gradient(135deg, var(--color-cyan) 0%, var(--color-magenta) 50%, var(--color-primary) 100%);
+  --gradient-holo: linear-gradient(45deg, var(--color-cyan), var(--color-magenta), var(--color-primary), var(--color-cyan));
+  --gradient-scanline: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.03) 0px, rgba(0, 0, 0, 0.03) 1px, transparent 1px, transparent 2px);
+
+  // Typography
+  --font-sans: 'Rajdhani', 'Inter', sans-serif;
+  --font-heading: 'Valorax', 'Orbitron', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  --text-6xl: 4rem;
+
+  // Spacing
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  // Border Radius
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  // Shadows & Glows
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  --shadow-neon-yellow: 0 0 10px rgba(242, 233, 0, 0.5), 0 0 20px rgba(242, 233, 0, 0.3);
+  --shadow-neon-cyan: 0 0 10px rgba(242, 233, 0, 0.5), 0 0 20px rgba(242, 233, 0, 0.3);
+  --shadow-neon-purple: 0 0 10px rgba(217, 32, 49, 0.5), 0 0 20px rgba(217, 32, 49, 0.3);
+
+  // NEW: Enhanced neon shadows
+  --shadow-neon-cyan-intense: 0 0 10px var(--color-cyan-glow), 0 0 20px var(--color-cyan-glow), 0 0 40px var(--color-cyan-glow);
+  --shadow-neon-magenta-intense: 0 0 10px var(--color-magenta-glow), 0 0 20px var(--color-magenta-glow);
+  --shadow-text-neon-cyan: 0 0 5px var(--color-cyan), 0 0 10px var(--color-cyan), 0 0 20px var(--color-cyan), 0 0 40px var(--color-cyan-dark);
+  --shadow-text-neon-magenta: 0 0 5px var(--color-magenta), 0 0 10px var(--color-magenta), 0 0 20px var(--color-magenta);
+  --shadow-text-neon-yellow: 0 0 5px var(--color-primary), 0 0 10px var(--color-primary), 0 0 20px var(--color-primary);
+
+  // Transitions
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  // Z-index
+  --z-canvas: -1;
+  --z-content: 10;
+  --z-sticky: 100;
+  --z-overlay: 1000;
+}
+
+// Glassmorphism Mixin
+@mixin glass-panel {
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+@mixin neon-border($color) {
+  border: 1px solid $color;
+  box-shadow: 0 0 5px $color, inset 0 0 5px $color;
+}
+
+// CRT Scanline Effect Mixin
+@mixin crt-scanlines($opacity: 0.02) {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, $opacity) 0px,
+      rgba(0, 0, 0, $opacity) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    z-index: 100;
+  }
+}
+
+// Corner cut mixin using clip-path (Cyberpunk 2077 style)
+@mixin corner-cut($size: 15px) {
+  clip-path: polygon(
+    0 0,
+    calc(100% - #{$size}) 0,
+    100% $size,
+    100% 100%,
+    $size 100%,
+    0 calc(100% - #{$size})
+  );
+}
+
+// Asymmetric corner cut (top-right and bottom-left)
+@mixin corner-cut-asymmetric($tr: 20px, $bl: 20px) {
+  clip-path: polygon(
+    0 0,
+    calc(100% - #{$tr}) 0,
+    100% $tr,
+    100% 100%,
+    $bl 100%,
+    0 calc(100% - #{$bl})
+  );
+}
+
+// Holographic shimmer mixin
+@mixin holographic-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-cyan) 0%,
+    var(--color-magenta) 25%,
+    var(--color-primary) 50%,
+    var(--color-cyan) 75%,
+    var(--color-magenta) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: holographic 3s linear infinite;
+}
+
+// Iridescent border
+@mixin iridescent-border {
+  border: 2px solid transparent;
+  background-image:
+    linear-gradient(var(--color-bg), var(--color-bg)),
+    var(--gradient-holo);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+// Wireframe grid pattern mixin
+@mixin wireframe-grid($size: 50px, $opacity: 0.08) {
+  background-image:
+    linear-gradient(rgba(0, 240, 255, $opacity) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, $opacity) 1px, transparent 1px);
+  background-size: $size $size;
+}
+
+// Dot grid pattern
+@mixin dot-grid($size: 30px, $dot-size: 1px, $opacity: 0.2) {
+  background-image: radial-gradient(circle, rgba(0, 240, 255, $opacity) $dot-size, transparent $dot-size);
+  background-size: $size $size;
+}
+
+// RGB Split Glitch Mixin
+@mixin glitch-rgb($duration: 2s) {
+  animation: rgb-split $duration ease-in-out infinite;
+}
+
+// Typewriter effect mixin
+@mixin typewriter($chars: 30, $speed: 3s) {
+  overflow: hidden;
+  border-right: 2px solid var(--color-cyan);
+  white-space: nowrap;
+  animation:
+    typewriter $speed steps($chars, end) forwards,
+    blink-caret 0.75s step-end infinite;
+}
+
+// Theme Integration
+@mixin dark-mode {
+  --bg-primary: var(--color-bg);
+  --bg-secondary: var(--color-bg-secondary);
+  --bg-card: rgba(20, 20, 20, 0.6);
+  --border-color: rgba(255, 255, 255, 0.1);
+  
+  --heading-color: var(--text-primary);
+  --link-color: var(--color-primary);
+  --link-hover: var(--color-primary-light);
+}
+
+html { @include dark-mode; }
+
+// Accessibility: High contrast mode support
+@media (prefers-contrast: high) {
+  :root {
+    --color-primary: #ffff00;
+    --color-cyan: #00ffff;
+    --color-magenta: #ff00ff;
+    --text-primary: #ffffff;
+    --color-bg: #000000;
+  }
+}
+
+// Accessibility: Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+// Focus indicators for accessibility
+:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 2px;
+}
+
+a:focus-visible,
+button:focus-visible {
+  box-shadow: 0 0 0 3px var(--color-bg), 0 0 0 5px var(--color-cyan);
+}
+
+// Skip link for accessibility
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-cyan);
+  color: var(--color-bg);
+  padding: var(--space-2) var(--space-4);
+  z-index: 10001;
+  font-family: var(--font-mono);
+  text-decoration: none;
+
+  &:focus {
+    top: 0;
+  }
+}
+
+// Scroll progress indicator
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--gradient-cyber);
+  transform-origin: left;
+  z-index: 9999;
+  width: 0%;
+  transition: width 0.1s ease-out;
+}
+
+// View Transitions API Styles
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.25s;
+}
+
+::view-transition-old(root) {
+  animation: cyber-fade-out 0.25s ease-out forwards;
+}
+
+::view-transition-new(root) {
+  animation: cyber-fade-in 0.25s ease-in forwards;
+}
+
+@keyframes cyber-fade-out {
+  from {
+    opacity: 1;
+    filter: blur(0);
+  }
+  to {
+    opacity: 0;
+    filter: blur(2px);
+  }
+}
+
+@keyframes cyber-fade-in {
+  from {
+    opacity: 0;
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+// Scroll-driven animations (where supported)
+@supports (animation-timeline: scroll()) {
+  .scroll-reveal {
+    animation: scroll-fade-in linear;
+    animation-timeline: view();
+    animation-range: entry 0% entry 100%;
+  }
+
+  @keyframes scroll-fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+// Share Buttons
+.share-buttons {
+  display: flex;
+  gap: var(--space-3);
+  margin: var(--space-4) 0;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition-fast);
+
+  &:hover {
+    color: var(--color-cyan);
+    border-color: var(--color-cyan);
+    box-shadow: 0 0 10px var(--color-cyan-glow);
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.copy-btn.copied {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}

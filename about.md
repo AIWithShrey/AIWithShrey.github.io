@@ -1,22 +1,52 @@
 ---
-layout: post
+layout: page
 title: About
+description: Cloud-Native AI Engineer specializing in production systems for Kubernetes governance and platform engineering.
+permalink: /about/
 ---
 
-Hello Reader! My name is Shreyas Mocherla and I'm currently a Senior at Missouri University of Science and Technology pursuing my Bachelor's in Computer Science.
+## Hey there!
 
-My interests lie in Deep Learning, Open-Source and Cloud Native technologies. I run the Association of Computing Machinery (ACM) AI Special Interest Group at my university, holding the TensorFlow Certified Developer title from Google.
+I'm **Shreyas Mocherla**, a Cloud-Native AI Engineer and **CNCF Kubestronaut** currently working as a Software Engineer Intern at **Nirmata**, where I specialize in building production AI systems for Kubernetes governance and platform engineering.
 
-I have worked on various Deep Learning projects so far including but not limited to Object Detection, Image Segmentation, Image Classification, and many more Computer Vision related projects.
+## What I'm Working On
 
-I also have experience building language models (I made a neural network speak like Shakespeare, implemented Semantic Analysis of Tweets, etc).
+At Nirmata, I've developed core components of the **AI Platform Engineering Assistant** (launched at KubeCon North America 2025):
 
-Apart from the last three years of experience in DL, I am branching my skills into the world of Open-Source technologies such as Linux, Containers and Serverless Computing.
+- **[Kyverno MCP Server](https://github.com/nirmata/kyverno-mcp)** - A Model Context Protocol server that enables language models to generate and validate Kubernetes policies using Kyverno
+- **NCTL AI Agent** - A conversational CLI tool that transforms natural language into policy-as-code
+- **Multi-agent orchestration systems** for policy workflows that reduce what traditionally takes hours into minutes
 
-As an AI developer, I always faced the challenge of shipping my application due to the lack of underlying infrastructure and the missing approach of making my application accessible to a large user base (scaling my application without hiccups).
+## Technical Expertise
 
-In 2024, I aim to bring my skills in AI with Cloud Native technologies such as Containerd and Kubernetes to be able to serve my compute intensive apps to a wide audience.
+**Infrastructure & Cloud Native**
+- Kubernetes, Kyverno, OPA, Helm, Argo, Terraform, Docker
+- AWS, Azure
 
-With that said, I am also a Linux Foundation Certified System Administrator (LFCS) and plan to become a Certified Kubernetes Application Developer (CKAD) by the end of 2024.
+**AI/ML & Development**
+- TensorFlow, PyTorch, LangChain, LangGraph, CrewAI
+- RAG architecture, Multi-agent systems
+- Go, Python, YAML, CEL
 
-I am currently looking for internships in the field of AI/ML and Cloud Native technologies. If you have any opportunities, feel free to reach out to me at <shreyas@shreyasm.com>
+## Recognition
+
+- **CNCF Kubestronaut** - One of the youngest globally to earn this distinction (January 2025), holding all five CNCF Kubernetes certifications (CKA, CKAD, CKS, KCNA, KCSA)
+- **NVIDIA Deep Learning Institute Certified Instructor**
+- **TensorFlow Developer Certificate** holder
+- **Linux Foundation Certified System Administrator (LFCS)**
+
+## Background
+
+I'm a Computer Science student at Missouri University of Science and Technology, where I also run the **ACM AI Special Interest Group**. My journey started with deep learning and computer vision, eventually expanding into cloud-native technologies as I faced the challenges of deploying and scaling AI applications in production.
+
+This intersection of AI and infrastructure is where I've found my passion - making AI-powered automation work at scale in enterprise Kubernetes environments.
+
+## Let's Connect
+
+I'm always excited to discuss:
+- AI agents and LLM applications in infrastructure
+- Kubernetes policy and governance
+- Cloud-native development and platform engineering
+- Open source contributions
+
+Feel free to reach out at **[shreyas@shreyasm.com](mailto:shreyas@shreyasm.com)** or connect with me on [LinkedIn](https://linkedin.com/in/aiwithshrey) and [GitHub](https://github.com/aiwithshrey).

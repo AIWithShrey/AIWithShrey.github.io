@@ -1,6 +1,6 @@
-# Navigation and Footer - Used by home.html layout
+# Navigation Configuration
 
-navbar_entries:
+main:
   - title: About
     url: /about
 
@@ -10,13 +10,16 @@ navbar_entries:
   - title: Articles
     url: /articles
 
+  - title: Blog
+    url: /blog
+
   - title: Certifications
     url: /certifications
 
   - title: Contact
     url: /contact
 
-footer_entries:
+footer:
   - title: LinkedIn
     url: https://linkedin.com/in/aiwithshrey
 
@@ -28,3 +31,9 @@ footer_entries:
 
   - title: Feed
     url: /feed.xml
+
+social:
+  linkedin: https://linkedin.com/in/aiwithshrey
+  github: https://github.com/aiwithshrey
+  twitter: https://twitter.com/ShreyasMocherla
+  email: shreyas@shreyasm.com

@@ -1,0 +1,52 @@
+---
+layout: default
+---
+
+<article class="article-layout">
+  <header class="article-layout__header">
+    <div class="article-layout__meta">
+      <span>{{ page.date | date: "%B %d, %Y" }}</span>
+      {% if page.author %}
+      <span>&bull;</span>
+      <span>{{ page.author }}</span>
+      {% endif %}
+      {% if site.theme_config.show_reading_time %}
+      <span>&bull;</span>
+      <span>{% assign words = content | number_of_words %}{{ words | divided_by: 200 | plus: 1 }} min read</span>
+      {% endif %}
+    </div>
+
+    <h1 class="article-layout__title">{{ page.title }}</h1>
+
+    {% if page.excerpt %}
+    <p class="article-layout__excerpt">{{ page.excerpt }}</p>
+    {% endif %}
+  </header>
+
+  <div class="article-layout__content">
+    {{ content }}
+  </div>
+
+  <footer class="article-layout__footer">
+    {% if page.tags %}
+    <div class="article-layout__tags">
+      {% for tag in page.tags %}
+      <span class="badge">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="mt-8">
+      <a href="{{ '/articles' | relative_url }}" class="btn btn--outline">&larr; Back to Articles</a>
+    </div>
+
+    {% if page.external_url %}
+    <div class="mt-6">
+      <p class="text-muted text-sm">This article was originally published on an external site.</p>
+      <a href="{{ page.external_url }}" target="_blank" rel="noopener noreferrer" class="btn btn--primary mt-4">
+        Read Original &rarr;
+      </a>
+    </div>
+    {% endif %}
+  </footer>
+</article>
