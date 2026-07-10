@@ -1,29 +1,46 @@
-<div class="project-grid">
-  {% for project in site.data.projects.featured %}
-  <a href="{{ project.url }}" target="_blank" rel="noopener noreferrer" class="modern-card-link">
-    <article class="modern-card reveal">
-      {% if project.highlight %}
-      <span class="modern-card__highlight">{{ project.highlight }}</span>
-      {% endif %}
-
-      <div class="modern-card__icon" style="font-size: 2rem;">
-        {{ project.icon }}
+{% for project in site.data.projects.featured %}
+  {% if project.flagship %}
+  <!-- Flagship Project — full width hero-scale -->
+  <a href="{{ project.url }}" target="_blank" rel="noopener noreferrer" class="flagship-project-link reveal">
+    <article class="flagship-project">
+      <div class="flagship-project__badge">{{ project.highlight }}</div>
+      <div class="flagship-project__content">
+        <div class="flagship-project__icon">{{ project.icon }}</div>
+        <h3 class="flagship-project__title">{{ project.title }}</h3>
+        <p class="flagship-project__description">{{ project.long_description | default: project.description }}</p>
+        <div class="flagship-project__tags">
+          {% for tag in project.tags %}
+          <span class="flagship-project__tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
       </div>
-
-      <h3 class="modern-card__title">
-        {{ project.title }}
-      </h3>
-
-      <p class="modern-card__description">
-        {{ project.description }}
-      </p>
-
-      <div class="modern-card__meta">
-        {% for tag in project.tags %}
-        <span class="modern-card__tag">{{ tag }}</span>
-        {% endfor %}
+      <div class="flagship-project__arrow">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
       </div>
     </article>
   </a>
+  {% endif %}
+{% endfor %}
+
+<!-- Remaining projects — tighter 2-col grid -->
+<div class="project-grid project-grid--compact">
+  {% for project in site.data.projects.featured %}
+    {% unless project.flagship %}
+    <a href="{{ project.url }}" target="_blank" rel="noopener noreferrer" class="modern-card-link">
+      <article class="modern-card reveal">
+        {% if project.highlight %}
+        <span class="modern-card__highlight">{{ project.highlight }}</span>
+        {% endif %}
+        <div class="modern-card__icon" style="font-size: 1.75rem;">{{ project.icon }}</div>
+        <h3 class="modern-card__title">{{ project.title }}</h3>
+        <p class="modern-card__description">{{ project.description }}</p>
+        <div class="modern-card__meta">
+          {% for tag in project.tags %}
+          <span class="modern-card__tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+      </article>
+    </a>
+    {% endunless %}
   {% endfor %}
 </div>

@@ -1,29 +1,81 @@
-<div class="cert-grid">
-  {% for cert in site.data.certifications.certifications %}
-  {% if cert.credential_url %}
-  <a href="{{ cert.credential_url }}" target="_blank" rel="noopener noreferrer" class="modern-card-link">
-  {% endif %}
-    <article class="cert-card">
-      <div class="cert-card__icon">
-        {{ cert.icon }}
+<div class="cert-section">
+  <!-- Top row: Kubestronaut banner + progress ring side by side -->
+  <div class="cert-section__hero reveal">
+    <div class="cert-section__hero-content">
+      <h3 class="cert-section__title">{{ site.data.certifications.kubestronaut.title }}</h3>
+      <p class="cert-section__desc">{{ site.data.certifications.kubestronaut.description }}</p>
+      <div class="cert-section__highlight-certs">
+        {% for cert in site.data.certifications.certifications limit:5 %}
+        <a href="{{ cert.credential_url }}" target="_blank" rel="noopener noreferrer" class="cert-chip cert-chip--{{ cert.category }}">
+          <span class="cert-chip__abbr">{{ cert.abbr }}</span>
+        </a>
+        {% endfor %}
+        <span class="cert-chip cert-chip--count">+{{ site.data.certifications.certifications | size | minus: 5 }} more</span>
       </div>
+    </div>
+    <div class="cert-section__ring">
+      {% assign gp = site.data.certifications.golden_progress %}
+      {% assign ring_offset = 326.7 | times: gp.earned | divided_by: gp.total | minus: 326.7 | abs %}
+      <svg viewBox="0 0 120 120" class="progress-ring">
+        <circle class="progress-ring__bg" cx="60" cy="60" r="52" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8"/>
+        <circle class="progress-ring__fill" cx="60" cy="60" r="52" fill="none" stroke="url(#cert-gradient)" stroke-width="8" stroke-linecap="round"
+          stroke-dasharray="326.7" stroke-dashoffset="{{ ring_offset }}" transform="rotate(-90 60 60)"/>
+        <defs>
+          <linearGradient id="cert-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#f2e900"/>
+            <stop offset="100%" style="stop-color:#d92031"/>
+          </linearGradient>
+        </defs>
+        <text x="60" y="55" text-anchor="middle" class="progress-ring__number">{{ gp.earned }}</text>
+        <text x="60" y="72" text-anchor="middle" class="progress-ring__label">of {{ gp.total }}</text>
+      </svg>
+      <span class="cert-section__ring-caption">{% if gp.achieved %}Golden Kubestronaut &#10003; {{ gp.achieved_date }}{% else %}Golden Kubestronaut{% endif %}</span>
+    </div>
+  </div>
 
-      <div class="cert-card__content">
-        <h3 class="cert-card__title">
-          {{ cert.title }}
-        </h3>
+  <!-- Expandable full cert grid -->
+  <details class="cert-section__details reveal">
+    <summary class="cert-section__toggle">
+      <span>View all {{ site.data.certifications.certifications | size }} certifications</span>
+      <svg class="cert-section__chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </summary>
+    <div class="cert-section__grid">
+      {% for cert in site.data.certifications.certifications %}
+      <a href="{{ cert.credential_url }}" target="_blank" rel="noopener noreferrer" class="cert-badge cert-badge--{{ cert.category }}">
+        <span class="cert-badge__abbr">{{ cert.abbr }}</span>
+        <span class="cert-badge__name">{{ cert.name }}</span>
+      </a>
+      {% endfor %}
+    </div>
 
-        <p class="cert-card__issuer">{{ cert.issuer }}</p>
+    <!-- Remaining for Golden (hidden once achieved) -->
+    {% if site.data.certifications.golden_progress.remaining and site.data.certifications.golden_progress.remaining.size > 0 %}
+    <div class="cert-section__remaining">
+      <span class="cert-section__remaining-label">Still needed:</span>
+      {% for cert in site.data.certifications.golden_progress.remaining %}
+      <span class="cert-badge cert-badge--locked">
+        <span class="cert-badge__abbr">{{ cert.abbr }}</span>
+        <span class="cert-badge__name">{{ cert.name }}</span>
+      </span>
+      {% endfor %}
+    </div>
+    {% endif %}
 
-        <p class="cert-card__description">
-          {{ cert.description }}
-        </p>
+    {% if site.data.certifications.additional %}
+    <div class="cert-section__additional">
+      {% for cert in site.data.certifications.additional %}
+      <a href="{{ cert.credential_url }}" target="_blank" rel="noopener noreferrer" class="cert-badge cert-badge--additional">
+        <span class="cert-badge__name">{{ cert.title }}</span>
+        <span class="cert-badge__issuer">{{ cert.issuer }}</span>
+      </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </details>
 
-        <p class="cert-card__date">Earned: {{ cert.date }}</p>
-      </div>
-    </article>
-  {% if cert.credential_url %}
-  </a>
-  {% endif %}
-  {% endfor %}
+  <div class="cert-section__cta reveal">
+    <a href="https://www.credly.com/users/shreyas-mocherla/badges" target="_blank" rel="noopener noreferrer" class="btn btn--primary">
+      View Full Credly Profile
+    </a>
+  </div>
 </div>

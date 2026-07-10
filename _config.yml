@@ -1,10 +1,10 @@
 title: Shreyas Mocherla
 author: Shreyas Mocherla
-url: https://aiwithshrey.github.io
+url: https://shreyasm.com
 description: >
-  Building production AI systems
-  for Kubernetes governance at Nirmata. Passionate about policy-as-code,
-  platform engineering, and making infrastructure automation intelligent.
+  Software Engineer at Nirmata. CNCF Golden Kubestronaut.
+  Building AI agents, MCP servers, and LLM infrastructure for Kubernetes
+  governance and platform engineering.
 
 permalink: /:slug
 
@@ -20,6 +20,11 @@ collections:
 
 # Defaults
 defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/images/og-card.png
+
   - scope:
       path: ""
       type: "articles"
@@ -51,6 +56,10 @@ highlighter: rouge
 
 sass:
   style: :compressed
+
+twitter:
+  username: ShreyasMocherla
+  card: summary_large_image
 
 plugins:
   - jekyll-feed

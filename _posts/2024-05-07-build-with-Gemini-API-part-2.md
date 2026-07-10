@@ -29,7 +29,7 @@ First, let's get our API key from Google AI Studio, which is essential for acces
 ### Steps to Get Your API Key:
 
 1. **Sign into Google AI Studio**: Navigate to the Google AI Studio website at [Google AI Studio](https://aistudio.google.com/). Sign in using your Google account credentials.
-2. **Acquire the API Key**: Once logged in, look for the "Get API Key" button—typically found on the top-left corner of the screen. Click on it to generate your API key.
+2. **Acquire the API Key**: Once logged in, look for the "Get API Key" button, typically found on the top-left corner of the screen. Click on it to generate your API key.
 
 With your API key secured, you're ready to engage with the Gemini API and build applications that can interact intelligently with users.
 

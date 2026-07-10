@@ -64,6 +64,11 @@
             reinitCanvasObservers();
           }
 
+          // Re-initialize terminal if it exists on the new page
+          if (typeof window.initTerminal === 'function') {
+            window.initTerminal();
+          }
+
           // Scroll to top on page change
           window.scrollTo(0, 0);
         }).finished;
@@ -95,6 +100,11 @@
           }
           if (typeof reinitCanvasObservers === 'function') {
             reinitCanvasObservers();
+          }
+
+          // Re-initialize terminal if it exists on the new page
+          if (typeof window.initTerminal === 'function') {
+            window.initTerminal();
           }
 
           window.scrollTo(0, 0);

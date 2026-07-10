@@ -1,6 +1,8 @@
-<form class="contact-form" action="https://formspree.io/f/mwpkqpzq" method="POST" aria-label="Contact form">
+<p class="contact-form__required-note">Fields marked with <span class="required-star">*</span> are required</p>
+
+<form class="contact-form" action="https://formspree.io/f/mwpkqpzq" method="POST" aria-label="Contact form" id="contact-form" novalidate>
   <div class="contact-form__group">
-    <label class="contact-form__label" for="name">Name <span aria-hidden="true">*</span></label>
+    <label class="contact-form__label" for="name">Name <span class="required-star" aria-label="required">*</span></label>
     <input
       class="contact-form__input"
       type="text"
@@ -8,11 +10,13 @@
       name="name"
       placeholder="Your name"
       required
+      minlength="2"
     >
+    <span class="contact-form__error" id="name-error"></span>
   </div>
 
   <div class="contact-form__group">
-    <label class="contact-form__label" for="email">Email <span aria-hidden="true">*</span></label>
+    <label class="contact-form__label" for="email">Email <span class="required-star" aria-label="required">*</span></label>
     <input
       class="contact-form__input"
       type="email"
@@ -21,10 +25,11 @@
       placeholder="your.email@example.com"
       required
     >
+    <span class="contact-form__error" id="email-error"></span>
   </div>
 
   <div class="contact-form__group">
-    <label class="contact-form__label" for="subject">Subject <span aria-hidden="true">*</span></label>
+    <label class="contact-form__label" for="subject">Subject <span class="required-star" aria-label="required">*</span></label>
     <input
       class="contact-form__input"
       type="text"
@@ -32,26 +37,32 @@
       name="subject"
       placeholder="What is this about?"
       required
+      minlength="3"
     >
+    <span class="contact-form__error" id="subject-error"></span>
   </div>
 
   <div class="contact-form__group">
-    <label class="contact-form__label" for="message">Message <span aria-hidden="true">*</span></label>
+    <label class="contact-form__label" for="message">Message <span class="required-star" aria-label="required">*</span></label>
     <textarea
       class="contact-form__textarea"
       id="message"
       name="message"
       placeholder="Your message..."
       required
+      minlength="10"
     ></textarea>
+    <span class="contact-form__error" id="message-error"></span>
   </div>
 
   <!-- Honeypot for spam protection -->
-  <input type="text" name="_gotcha" style="display:none">
+  <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
 
-  <button type="submit" class="contact-form__submit">
+  <button type="submit" class="contact-form__submit" id="submit-btn">
     Send Message
   </button>
+
+  <div class="contact-form__status" id="form-status"></div>
 </form>
 
 <div class="mt-8 text-center">
@@ -60,3 +71,111 @@
     shreyas@shreyasm.com
   </a>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const form = document.getElementById('contact-form');
+  const submitBtn = document.getElementById('submit-btn');
+  const formStatus = document.getElementById('form-status');
+
+  const validators = {
+    name: (value) => {
+      if (!value.trim()) return 'Name is required';
+      if (value.trim().length < 2) return 'Name must be at least 2 characters';
+      return '';
+    },
+    email: (value) => {
+      if (!value.trim()) return 'Email is required';
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(value)) return 'Please enter a valid email address';
+      return '';
+    },
+    subject: (value) => {
+      if (!value.trim()) return 'Subject is required';
+      if (value.trim().length < 3) return 'Subject must be at least 3 characters';
+      return '';
+    },
+    message: (value) => {
+      if (!value.trim()) return 'Message is required';
+      if (value.trim().length < 10) return 'Message must be at least 10 characters';
+      return '';
+    }
+  };
+
+  function validateField(field) {
+    const fieldName = field.name === '_replyto' ? 'email' : field.name;
+    const validator = validators[fieldName];
+    if (!validator) return true;
+
+    const error = validator(field.value);
+    const errorEl = document.getElementById(fieldName + '-error');
+
+    if (error) {
+      field.classList.add('contact-form__input--error');
+      field.classList.remove('contact-form__input--valid');
+      if (errorEl) errorEl.textContent = error;
+      return false;
+    } else {
+      field.classList.remove('contact-form__input--error');
+      field.classList.add('contact-form__input--valid');
+      if (errorEl) errorEl.textContent = '';
+      return true;
+    }
+  }
+
+  // Validate on blur
+  form.querySelectorAll('input, textarea').forEach(field => {
+    field.addEventListener('blur', () => validateField(field));
+    field.addEventListener('input', () => {
+      if (field.classList.contains('contact-form__input--error')) {
+        validateField(field);
+      }
+    });
+  });
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    // Validate all fields
+    let isValid = true;
+    form.querySelectorAll('input:not([type="hidden"]), textarea').forEach(field => {
+      if (!validateField(field)) isValid = false;
+    });
+
+    if (!isValid) {
+      formStatus.textContent = 'Please fix the errors above';
+      formStatus.className = 'contact-form__status contact-form__status--error';
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+    formStatus.textContent = '';
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        formStatus.textContent = 'Message sent successfully!';
+        formStatus.className = 'contact-form__status contact-form__status--success';
+        form.reset();
+        form.querySelectorAll('.contact-form__input--valid').forEach(el => {
+          el.classList.remove('contact-form__input--valid');
+        });
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch (error) {
+      formStatus.textContent = 'Something went wrong. Please try again or email directly.';
+      formStatus.className = 'contact-form__status contact-form__status--error';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send Message';
+    }
+  });
+});
+</script>

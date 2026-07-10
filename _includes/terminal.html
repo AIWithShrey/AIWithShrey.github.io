@@ -18,14 +18,27 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
+// Terminal initialization function - can be called after page transitions
+window.initTerminal = function() {
   const output = document.getElementById('terminal-output');
   const input = document.getElementById('terminal-input');
+
+  // Don't initialize if terminal elements don't exist
+  if (!output || !input) return;
+
+  // Check if already initialized (prevent double init)
+  if (output.dataset.initialized === 'true') return;
+  output.dataset.initialized = 'true';
+
   const startTime = Date.now();
 
   // ============ ROTATING ASCII GLOBE ============
   const globeCanvas = document.getElementById('globe-canvas');
+  if (!globeCanvas) return;
   const globeCtx = globeCanvas.getContext('2d');
+
+  // Store animation frame ID for cleanup
+  let globeAnimationId = null;
 
   function initGlobe() {
     const terminalBody = document.getElementById('terminal-output');
@@ -94,14 +107,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     globeAngle += 0.008;
-    requestAnimationFrame(renderGlobe);
+    globeAnimationId = requestAnimationFrame(renderGlobe);
   }
 
   initGlobe();
   renderGlobe();
 
-  // Resize handler
-  window.addEventListener('resize', initGlobe);
+  // Resize handler - use named function for cleanup
+  const handleResize = () => initGlobe();
+  window.addEventListener('resize', handleResize);
   // ============ END GLOBE ============
 
   // AI Chatbot configuration
@@ -164,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const certsData = [
     {% for cert in site.data.certifications.certifications %}
     {
-      title: {{ cert.title | jsonify }},
+      title: "{{ cert.abbr }} - {{ cert.name }}",
       issuer: {{ cert.issuer | jsonify }},
       date: {{ cert.date | jsonify }},
       url: {{ cert.credential_url | jsonify }}
@@ -404,7 +418,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return `<pre style="line-height: 1.3; font-size: 12px;">
     <span style="color: #00f0ff;">    *    </span>     <span class="cmd">shreyas</span>@<span class="cmd">k8s-controlplane</span>
     <span style="color: #00f0ff;">   /|\\   </span>     -------------------------
-    <span style="color: #00f0ff;">  / | \\  </span>     <span class="cmd">Title:</span> CNCF Kubestronaut
+    <span style="color: #00f0ff;">  / | \\  </span>     <span class="cmd">Title:</span> Software Engineer & Golden Kubestronaut
     <span style="color: #00f0ff;"> /  |  \\ </span>     <span class="cmd">OS:</span> CloudNative Linux x86_64
     <span style="color: #00f0ff;">/___|___\\</span>     <span class="cmd">Host:</span> Kubernetes v1.31
     <span style="color: #00f0ff;">   |||   </span>     <span class="cmd">Kernel:</span> Kyverno + OPA
@@ -533,10 +547,11 @@ document.addEventListener('DOMContentLoaded', () => {
   <span class="cmd">fortune</span>    - Random quote
 
   <span style="opacity: 0.6; color: #00f0ff;">K.E.R.N.E.L.:</span>
+  <span class="cmd">speaking</span>  - Conference talks
   <span class="cmd">ask</span> &lt;question&gt; - Ask K.E.R.N.E.L. about Shreyas`,
 
     // Content commands
-    about: "Cloud-Native AI Engineer & CNCF Kubestronaut.\nBuilding production AI systems for Kubernetes governance at Nirmata.",
+    about: "Software Engineer at Nirmata & CNCF Golden Kubestronaut.\nBuilding AI agents for Kubernetes governance. BS in Computer Science, Missouri S&T (Dec 2025).",
     contact: "Email: shreyas@shreyasm.com\nGitHub: <a href='https://github.com/aiwithshrey' class='link'>github.com/aiwithshrey</a>",
     projects: () => formatList(projectsData, '/projects', 'Projects'),
     articles: () => formatList(articlesData, '/articles', 'Articles'),
@@ -546,7 +561,7 @@ document.addEventListener('DOMContentLoaded', () => {
     social: formatSocial,
     resume: () => `Download: <a href="/assets/resume.pdf" target="_blank" class="link">resume.pdf</a>`,
     cv: () => commands.resume(),
-    whoami: "shreyas - Cloud-Native AI Engineer, Kubestronaut, Builder of AI systems that actually work in production.",
+    whoami: "shreyas - Software Engineer at Nirmata, Golden Kubestronaut, Builder of AI systems that actually work in production.",
     uptime: () => `Session uptime: ${getUptime()}`,
 
     // Navigation
@@ -584,6 +599,9 @@ document.addEventListener('DOMContentLoaded', () => {
     hello: "Hello, World!",
     hi: "Hey there! Type 'help' to see what I can do.",
     '': () => '',
+
+    // Speaking
+    speaking: "KubeCon India 2026 (Mumbai, June 18-19, 2026)\n\"Run Your Own AI Cluster on a DGX Spark: Kubernetes, GPUs, and DRA\"\nAI+ML track, 30-minute session. Watch for the recording on the CNCF YouTube channel.",
 
     // AI Chat
     ask: (args) => askAI(args),
@@ -709,10 +727,23 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Focus input when clicking terminal
-  document.querySelector('.terminal-window').addEventListener('click', () => {
-    input.focus();
-  });
+  const terminalWindow = document.querySelector('.terminal-window');
+  if (terminalWindow) {
+    terminalWindow.addEventListener('click', () => {
+      input.focus();
+    });
+  }
 
   runBootSequence();
+};
+
+// Initialize on first page load
+document.addEventListener('DOMContentLoaded', () => {
+  window.initTerminal();
 });
+
+// Also try to init immediately in case DOMContentLoaded already fired (for view transitions)
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+  setTimeout(window.initTerminal, 0);
+}
 </script>

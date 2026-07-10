@@ -63,7 +63,7 @@
 
   // Typography
   --font-sans: 'Rajdhani', 'Inter', sans-serif;
-  --font-heading: 'Valorax', 'Orbitron', sans-serif;
+  --font-heading: 'Orbitron', 'Valorax', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
   --text-xs: 0.75rem;
@@ -374,6 +374,38 @@ button:focus-visible {
       opacity: 1;
       transform: translateY(0);
     }
+  }
+}
+
+// ========================================
+// Ambient Background (replaces particle canvas)
+// ========================================
+
+.ambient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--color-bg);
+  overflow: hidden;
+
+  &__gradient {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(242, 233, 0, 0.04) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 80%, rgba(217, 32, 49, 0.03) 0%, transparent 50%),
+      radial-gradient(ellipse 50% 40% at 50% 50%, rgba(0, 240, 255, 0.015) 0%, transparent 50%);
+  }
+
+  &__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 70%);
   }
 }
 

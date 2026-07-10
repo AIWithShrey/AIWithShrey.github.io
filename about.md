@@ -1,45 +1,57 @@
 ---
 layout: page
 title: About
-description: Cloud-Native AI Engineer specializing in production systems for Kubernetes governance and platform engineering.
+description: Software Engineer at Nirmata. CNCF Golden Kubestronaut. Building AI agents for Kubernetes governance and platform engineering.
 permalink: /about/
 ---
 
 ## Hey there!
 
-I'm **Shreyas Mocherla**, a Cloud-Native AI Engineer and **CNCF Kubestronaut** currently working as a Software Engineer Intern at **Nirmata**, where I specialize in building production AI systems for Kubernetes governance and platform engineering.
+I'm **Shreyas Mocherla**, a Software Engineer at **Nirmata** and a **CNCF Golden Kubestronaut**, building AI agents for Kubernetes governance from Bengaluru, India. I bridge the gap between traditional infrastructure management and modern AI capabilities — MCP servers, conversational CLI agents, and LLM benchmarking frameworks that make policy-as-code feel like a conversation instead of a chore. I hold a BS in Computer Science from Missouri S&T (Dec 2025).
 
 ## What I'm Working On
 
-At Nirmata, I've developed core components of the **AI Platform Engineering Assistant** (launched at KubeCon North America 2025):
+At Nirmata, I'm a core contributor to private and open-source LLM infrastructure, including the **AI Platform Engineering Assistant** (launched at KubeCon North America 2025):
 
-- **[Kyverno MCP Server](https://github.com/nirmata/kyverno-mcp)** - A Model Context Protocol server that enables language models to generate and validate Kubernetes policies using Kyverno
-- **NCTL AI Agent** - A conversational CLI tool that transforms natural language into policy-as-code
+- **[Kyverno MCP Server](https://github.com/nirmata/kyverno-mcp)** - An open-source MCP server in Go that enables AI assistants to generate, validate, and troubleshoot Kyverno policies across multi-cluster K8s environments
+- **NCTL AI Agent** - A conversational CLI tool that transforms natural language into policy-as-code, with LLM-driven Chainsaw test generation for end-to-end policy validation
 - **Multi-agent orchestration systems** for policy workflows that reduce what traditionally takes hours into minutes
+- **OPA Gatekeeper migration** - Won first place in an internal hackathon building an agent skill that migrates Gatekeeper policies to Kyverno's new ValidatingPolicy type
+
+## Where I've Been
+
+- **Nirmata** (2025-present) - Joined as a Software Engineer Intern bringing generative AI to Kyverno; now full-time building the AI Platform Engineering Assistant
+- **NVIDIA** (2022-2026) - University Ambassador and Deep Learning Institute Certified Instructor, running hands-on workshops on neural networks, CNNs, and transfer learning
+- **InfraCloud Technologies** (2024) - Built [InSightful](https://github.com/infracloudio/insightful), a RAG-enabled ReAct agent for tech communities, published on the [CNCF blog](https://www.cncf.io/blog/2024/08/19/developing-an-ai-agent-for-smart-contextual-qa/)
+- **Missouri S&T** - Founded the ACM AI Special Interest Group and served as its President; chaired the ACM Data committee
 
 ## Technical Expertise
 
 **Infrastructure & Cloud Native**
-- Kubernetes, Kyverno, OPA, Helm, Argo, Terraform, Docker
-- AWS, Azure
+- Kubernetes, Kyverno, OPA, Helm, Argo, Prometheus, Cilium, Istio, Backstage, Terraform, Docker
+- AWS (incl. Bedrock), Azure
 
 **AI/ML & Development**
-- TensorFlow, PyTorch, LangChain, LangGraph, CrewAI
-- RAG architecture, Multi-agent systems
+- LangChain, LangGraph, CrewAI, TensorFlow, PyTorch
+- MCP, RAG architecture, Multi-agent systems, AWS Bedrock, Google Gemini
 - Go, Python, YAML, CEL
 
-## Recognition
+## Speaking
 
-- **CNCF Kubestronaut** - One of the youngest globally to earn this distinction (January 2025), holding all five CNCF Kubernetes certifications (CKA, CKAD, CKS, KCNA, KCSA)
-- **NVIDIA Deep Learning Institute Certified Instructor**
-- **TensorFlow Developer Certificate** holder
-- **Linux Foundation Certified System Administrator (LFCS)**
+<div class="speaking-card reveal">
+  <div class="speaking-card__event">KubeCon India 2026</div>
+  <h3 class="speaking-card__title">Run Your Own AI Cluster on a DGX Spark: Kubernetes, GPUs, and DRA</h3>
+  <div class="speaking-card__meta">
+    <span>June 18-19, 2026, Mumbai</span>
+    <span>AI+ML Track</span>
+    <span>30 min, Intermediate</span>
+  </div>
+  <p class="speaking-card__desc">Covered GPU Operator, Dynamic Resource Allocation, ResourceClasses/ResourceClaims, and vLLM.</p>
+</div>
 
-## Background
+## Certifications
 
-I'm a Computer Science student at Missouri University of Science and Technology, where I also run the **ACM AI Special Interest Group**. My journey started with deep learning and computer vision, eventually expanding into cloud-native technologies as I faced the challenges of deploying and scaling AI applications in production.
-
-This intersection of AI and infrastructure is where I've found my passion - making AI-powered automation work at scale in enterprise Kubernetes environments.
+{% include certification_list.html %}
 
 ## Let's Connect
 
@@ -49,4 +61,4 @@ I'm always excited to discuss:
 - Cloud-native development and platform engineering
 - Open source contributions
 
-Feel free to reach out at **[shreyas@shreyasm.com](mailto:shreyas@shreyasm.com)** or connect with me on [LinkedIn](https://linkedin.com/in/aiwithshrey) and [GitHub](https://github.com/aiwithshrey).
+Feel free to reach out at **[shreyas@shreyasm.com](mailto:shreyas@shreyasm.com)** or connect with me on [LinkedIn](https://linkedin.com/in/aiwithshrey), [GitHub](https://github.com/aiwithshrey), and [Hugging Face](https://huggingface.co/ShreyasM).

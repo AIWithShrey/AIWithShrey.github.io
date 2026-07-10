@@ -2,29 +2,31 @@
 
 featured:
   - title: Kyverno MCP Server
-    description: A Model Context Protocol server that enables LLMs to generate, validate, and manage Kubernetes policies using Kyverno. Empowers AI assistants like Claude and Cursor to interact with Kubernetes clusters.
+    description: MCP server enabling AI assistants to generate, validate, and troubleshoot Kyverno policies across multi-cluster K8s environments.
+    long_description: Open-source MCP server in Go that connects AI assistants like Claude Desktop, Amazon Q, and Cursor to Kyverno policy engines. Supports compliance monitoring via PolicyReport CRDs across multi-cluster Kubernetes environments.
     url: https://github.com/nirmata/kyverno-mcp
-    tags: [Kubernetes, MCP, Go, Kyverno]
+    tags: [Kubernetes, MCP, Go]
     icon: "\U0001F50C"
     highlight: FEATURED
+    flagship: true
 
   - title: NCTL AI Agent
-    description: A conversational CLI tool that transforms natural language into Kubernetes policies. Core component of Nirmata's AI Platform Engineering Assistant launched at KubeCon NA 2025.
+    description: Conversational CLI transforming natural language into Kubernetes policies. Launched at KubeCon NA 2025.
     url: https://nirmata.com/nctl-ai/
-    tags: [AI, Kubernetes, Policy-as-Code, Go]
+    tags: [AI, Kubernetes, Go]
     icon: "\U0001F916"
     highlight: NIRMATA
 
   - title: InSightful
-    description: An intelligent ReAct AI agent for tech communities that analyzes discussions, tracks sentiment, searches Stack Overflow, and browses the web for relevant technical information.
+    description: ReAct AI agent for contextual Q&A. Published on the official CNCF blog.
     url: https://github.com/infracloudio/insightful
-    tags: [LangChain, RAG, Python, AI Agent]
+    tags: [LangChain, RAG, Python]
     icon: "\U0001F4AC"
     highlight: CNCF
 
 all:
   - title: Kyverno MCP Server
-    description: MCP server enabling LLMs to generate and validate Kubernetes policies using Kyverno.
+    description: Open-source MCP server enabling AI assistants to generate, validate, and troubleshoot Kyverno policies across multi-cluster K8s environments.
     url: https://github.com/nirmata/kyverno-mcp
     tags: [Kubernetes, MCP, Go, Kyverno]
     category: Cloud Native
@@ -36,7 +38,7 @@ all:
     category: Cloud Native
 
   - title: InSightful
-    description: AI assistant for tech communities - analyzing discussions, sentiment, and providing contextual Q&A.
+    description: ReAct AI agent for smart contextual Q&A, built at InfraCloud. Published on the CNCF blog.
     url: https://github.com/infracloudio/insightful
     tags: [LangChain, RAG, Python]
     category: AI/ML

@@ -2,30 +2,40 @@
 layout: default
 ---
 
-<header>
-  <div class="site-header-content">
-    <a href="https://github.com/AIWithShrey" class="site-logo">
-      <img src="{{ '/assets/images/Circle_cropped.png' | relative_url }}" alt="Logo">
-    </a>
-    {% if site.theme_config.show_navbar == true %}
-      {% include horizontal_list.html collection=site.data.home.navbar_entries %}
-    {% endif %}
-  </div>
-</header>
+{% include navbar.html %}
 
-<!-- Hero Section -->
-{% include hero.html
-   tagline="Cloud-Native AI Engineer & CNCF Kubestronaut"
-   title=site.title
-   subtitle=site.description
-%}
+<!-- Split Hero Section -->
+{% include hero.html %}
 
-{{ content }}
+<!-- Terminal Prompt Divider -->
+<div class="terminal-divider reveal">
+  <span class="terminal-divider__prompt">shreyas@k8s-controlplane:~$</span>
+  <span class="terminal-divider__cursor"></span>
+</div>
 
-<!-- Cyberpunk Terminal Section -->
+<!-- Featured Projects -->
 <section class="section">
+  <div class="section-heading reveal">
+    <h2 class="section-heading__title">Featured Projects</h2>
+  </div>
+  {% include featured_projects.html %}
+</section>
+
+<!-- Section Break -->
+<div class="section-break" aria-hidden="true">
+  <div class="section-break__line"></div>
+</div>
+
+<!-- K.E.R.N.E.L. Terminal -->
+<section class="section">
+  <div class="section-heading reveal">
+    <h2 class="section-heading__title">K.E.R.N.E.L.</h2>
+    <p class="section-heading__subtitle">Interactive terminal — try <code>help</code>, <code>projects</code>, or <code>ask</code></p>
+  </div>
   {% include terminal.html %}
 </section>
+
+{{ content }}
 
 {% if site.theme_config.show_footer == true %}
 <footer class="site-footer">
@@ -36,5 +46,6 @@ layout: default
     </a>
     {% endfor %}
   </div>
+  <p class="site-footer__copyright">&copy; {{ "now" | date: "%Y" }} {{ site.author }}</p>
 </footer>
 {% endif %}

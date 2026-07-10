@@ -1,4 +1,4 @@
-# Navigation and Footer - Used by home.html layout
+# Navigation and Footer - Used by home.html and page.html layouts
 
 navbar_entries:
   - title: About
@@ -7,11 +7,8 @@ navbar_entries:
   - title: Projects
     url: /projects
 
-  - title: Articles
-    url: /articles
-
-  - title: Certifications
-    url: /certifications
+  - title: Writing
+    url: /writing
 
   - title: Contact
     url: /contact
@@ -26,5 +23,5 @@ footer_entries:
   - title: X (Twitter)
     url: https://twitter.com/ShreyasMocherla
 
-  - title: Feed
-    url: /feed.xml
+  - title: Credly
+    url: https://www.credly.com/users/shreyas-mocherla/badges

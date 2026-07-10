@@ -1,13 +1,34 @@
-<section class="hero reveal">
-  <p class="hero__tagline">{{ include.tagline | default: "Cloud-Native AI Engineer" }}</p>
-  <h1 class="hero__title" data-text="{{ include.title | default: site.title }}">{{ include.title | default: site.title }}</h1>
-  <p class="hero__subtitle">{{ include.subtitle | default: site.description }}</p>
-
-  {% if include.badges %}
-  <div class="hero__badges">
-    {% for badge in include.badges %}
-    <span class="badge{% cycle '', ' badge--cyber', ' badge--magenta' %}">{{ badge }}</span>
-    {% endfor %}
+<section class="hero-split">
+  <div class="hero-split__content">
+    <p class="hero-split__role hero-entrance hero-entrance--1">Software Engineer at Nirmata</p>
+    <h1 class="hero-split__name hero-entrance hero-entrance--2" data-text="{{ site.title }}">{{ site.title }}</h1>
+    <p class="hero-split__tagline hero-entrance hero-entrance--3">Building AI agents, MCP servers, and LLM infrastructure for Kubernetes governance and platform engineering.</p>
+    <div class="hero-split__badges">
+      <span class="hero-badge hero-badge--gold hero-entrance hero-entrance--4">CNCF Golden Kubestronaut</span>
+      <span class="hero-badge hero-badge--magenta hero-entrance hero-entrance--5">KubeCon India 2026 Speaker</span>
+      <span class="hero-badge hero-badge--subtle hero-entrance hero-entrance--6">CNCF Blog Author</span>
+    </div>
   </div>
-  {% endif %}
+  <div class="hero-split__stats hero-entrance hero-entrance--7" aria-label="Impact stats">
+    <div class="stat-card stat-card--gold">
+      <span class="stat-card__number">16</span>
+      <span class="stat-card__label">CNCF Certs</span>
+      <span class="stat-card__detail">Golden Kubestronaut &#10003;</span>
+    </div>
+    <div class="stat-card stat-card--default">
+      <span class="stat-card__number">3+</span>
+      <span class="stat-card__label">Open Source</span>
+      <span class="stat-card__detail">MCP, AI & K8s projects</span>
+    </div>
+    <div class="stat-card stat-card--default">
+      <span class="stat-card__number">1</span>
+      <span class="stat-card__label">CNCF Blog</span>
+      <span class="stat-card__detail">Published August 2024</span>
+    </div>
+    <div class="stat-card stat-card--default">
+      <span class="stat-card__number">KubeCon</span>
+      <span class="stat-card__label">Speaker</span>
+      <span class="stat-card__detail">India 2026, Mumbai</span>
+    </div>
+  </div>
 </section>
