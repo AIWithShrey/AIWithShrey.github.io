@@ -1,22 +1,22 @@
 ---
 layout: page
 title: About
-description: Software Engineer at Nirmata. CNCF Golden Kubestronaut. Building AI agents for Kubernetes governance and platform engineering.
+description: Software Engineer at Nirmata. CNCF Golden Kubestronaut. KubeCon India 2026 speaker. Building AI agents for Kubernetes governance and platform engineering.
 permalink: /about/
 ---
 
 ## Hey there!
 
-I'm **Shreyas Mocherla**, a Software Engineer at **Nirmata** and a **CNCF Golden Kubestronaut**, building AI agents for Kubernetes governance from Bengaluru, India. I bridge the gap between traditional infrastructure management and modern AI capabilities — MCP servers, conversational CLI agents, and LLM benchmarking frameworks that make policy-as-code feel like a conversation instead of a chore. I hold a BS in Computer Science from Missouri S&T (Dec 2025).
+I'm **Shreyas Mocherla**, a Software Engineer at **Nirmata**, a **CNCF Golden Kubestronaut**, and a **KubeCon + CloudNativeCon India 2026 speaker**, building AI agents for Kubernetes governance from Bengaluru, India. I bridge the gap between traditional infrastructure management and modern AI capabilities — MCP servers, conversational CLI agents, and LLM benchmarking frameworks that make policy-as-code feel like a conversation instead of a chore. I hold a BS in Computer Science from Missouri S&T (Dec 2025).
 
 ## What I'm Working On
 
 At Nirmata, I'm a core contributor to private and open-source LLM infrastructure, including the **AI Platform Engineering Assistant** (launched at KubeCon North America 2025):
 
-- **[Kyverno MCP Server](https://github.com/nirmata/kyverno-mcp)** - An open-source MCP server in Go that enables AI assistants to generate, validate, and troubleshoot Kyverno policies across multi-cluster K8s environments
-- **NCTL AI Agent** - A conversational CLI tool that transforms natural language into policy-as-code, with LLM-driven Chainsaw test generation for end-to-end policy validation
-- **Multi-agent orchestration systems** for policy workflows that reduce what traditionally takes hours into minutes
-- **OPA Gatekeeper migration** - Won first place in an internal hackathon building an agent skill that migrates Gatekeeper policies to Kyverno's new ValidatingPolicy type
+- **[Kyverno MCP Server](https://github.com/nirmata/kyverno-mcp)** - Built and maintain the open-source MCP server (Go) that lets AI assistants like Claude and Cursor generate, validate, and troubleshoot Kyverno policies across multi-cluster K8s environments
+- **NCTL AI Agent** - Turned policy authoring from hand-written YAML into a conversation: a CLI agent that transforms natural language into policy-as-code, with LLM-driven Chainsaw test generation for end-to-end validation
+- **Multi-agent orchestration systems** - Cut policy workflow turnaround from hours to minutes by orchestrating specialized agents for authoring, testing, and remediation
+- **OPA Gatekeeper migration** - First place, internal hackathon: an agent skill that migrates Gatekeeper policies to Kyverno's new ValidatingPolicy type automatically
 
 ## Where I've Been
 
@@ -47,6 +47,7 @@ At Nirmata, I'm a core contributor to private and open-source LLM infrastructure
     <span>30 min, Intermediate</span>
   </div>
   <p class="speaking-card__desc">Covered GPU Operator, Dynamic Resource Allocation, ResourceClasses/ResourceClaims, and vLLM.</p>
+  <p class="speaking-card__links"><a href="https://www.youtube.com/playlist?list=PLj6h78yzYM2PmaTdAzefPqjawTlop1lgG" target="_blank" rel="noopener">Watch the recording →</a></p>
 </div>
 
 ## Certifications
