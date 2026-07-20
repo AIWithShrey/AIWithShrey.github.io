@@ -47,7 +47,7 @@ At Nirmata, I'm a core contributor to private and open-source LLM infrastructure
     <span>30 min, Intermediate</span>
   </div>
   <p class="speaking-card__desc">Covered GPU Operator, Dynamic Resource Allocation, ResourceClasses/ResourceClaims, and vLLM.</p>
-  <p class="speaking-card__links"><a href="https://www.youtube.com/playlist?list=PLj6h78yzYM2PmaTdAzefPqjawTlop1lgG" target="_blank" rel="noopener">Watch the recording →</a></p>
+  <p class="speaking-card__links"><a href="https://www.youtube.com/watch?v=H2CRNXYujbg" target="_blank" rel="noopener">Watch the recording →</a></p>
 </div>
 
 ## Certifications
