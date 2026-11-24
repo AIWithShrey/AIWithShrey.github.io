@@ -1,7 +1,7 @@
 ---
 layout: page
 title: About
-description: Software Engineer at Nirmata. CNCF Golden Kubestronaut. KubeCon India 2026 speaker. Building AI agents for Kubernetes governance and platform engineering.
+description: Software Engineer at Nirmata. CNCF Golden Kubestronaut. KubeCon India 2026 speaker. Building AI agents and workflows for Kubernetes governance and platform engineering.
 permalink: /about/
 ---
 
@@ -11,8 +11,9 @@ I'm **Shreyas Mocherla**, a Software Engineer at **Nirmata**, a **CNCF Golden Ku
 
 ## What I'm Working On
 
-At Nirmata, I'm a core contributor to private and open-source LLM infrastructure, including the **AI Platform Engineering Assistant** (launched at KubeCon North America 2025):
+At Nirmata, I'm building **OttoFlow** and contribute to private and open-source LLM infrastructure, including the **AI Platform Engineering Assistant** (launched at KubeCon North America 2025):
 
+- **[OttoFlow](https://github.com/nirmata/ottoflow)** - Kubernetes-native AI workflows. A workflow is a CRD that runs as a DAG mixing deterministic CEL, PromQL and Kubernetes API steps with LLM agents, so the LLM sees computed summaries instead of raw cluster data and runs stay reviewable and cheap
 - **[Kyverno MCP Server](https://github.com/nirmata/kyverno-mcp)** - Built and maintain the open-source MCP server (Go) that lets AI assistants like Claude and Cursor generate, validate, and troubleshoot Kyverno policies across multi-cluster K8s environments
 - **NCTL AI Agent** - Turned policy authoring from hand-written YAML into a conversation: a CLI agent that transforms natural language into policy-as-code, with LLM-driven Chainsaw test generation for end-to-end validation
 - **Multi-agent orchestration systems** - Cut policy workflow turnaround from hours to minutes by orchestrating specialized agents for authoring, testing, and remediation
@@ -20,7 +21,7 @@ At Nirmata, I'm a core contributor to private and open-source LLM infrastructure
 
 ## Where I've Been
 
-- **Nirmata** (2025-present) - Joined as a Software Engineer Intern bringing generative AI to Kyverno; now full-time building the AI Platform Engineering Assistant
+- **Nirmata** (2025-present) - Joined as a Software Engineer Intern bringing generative AI to Kyverno; now full-time building OttoFlow and the AI Platform Engineering Assistant
 - **NVIDIA** (2022-2026) - University Ambassador and Deep Learning Institute Certified Instructor, running hands-on workshops on neural networks, CNNs, and transfer learning
 - **InfraCloud Technologies** (2024) - Built [InSightful](https://github.com/infracloudio/insightful), a RAG-enabled ReAct agent for tech communities, published on the [CNCF blog](https://www.cncf.io/blog/2024/08/19/developing-an-ai-agent-for-smart-contextual-qa/)
 - **Missouri S&T** - Founded the ACM AI Special Interest Group and served as its President; chaired the ACM Data committee

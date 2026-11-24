@@ -10,6 +10,13 @@ featured:
     highlight: FEATURED
     flagship: true
 
+  - title: OttoFlow
+    description: Kubernetes-native AI workflows. Define a workflow as a CRD and run it as a DAG of deterministic steps and LLM agents.
+    url: https://github.com/nirmata/ottoflow
+    tags: [Kubernetes, AI, Go]
+    icon: "\U0001F500"
+    highlight: NIRMATA
+
   - title: NCTL AI Agent
     description: Conversational CLI transforming natural language into Kubernetes policies. Launched at KubeCon NA 2025.
     url: https://nirmata.com/nctl-ai/
@@ -25,6 +32,12 @@ featured:
     highlight: CNCF
 
 all:
+  - title: OttoFlow
+    description: Kubernetes-native AI workflows. Workflows are CRDs that run as DAGs mixing deterministic CEL, PromQL and Kubernetes API steps with LLM agents.
+    url: https://github.com/nirmata/ottoflow
+    tags: [Kubernetes, AI, Go, CEL]
+    category: Cloud Native
+
   - title: Kyverno MCP Server
     description: Open-source MCP server enabling AI assistants to generate, validate, and troubleshoot Kyverno policies across multi-cluster K8s environments.
     url: https://github.com/nirmata/kyverno-mcp
